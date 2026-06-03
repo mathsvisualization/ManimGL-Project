@@ -1,6 +1,6 @@
 from manimlib import *
 
-class TestForTest(InteractiveScene):
+class MKC(InteractiveScene):
     def construct(self):
-        t = Square()
+        t = Text("Hello World", font_size=33)
         self.add(t)
