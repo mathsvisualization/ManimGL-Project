@@ -29,15 +29,15 @@ pip install PyOpenGL==3.1.1a1
 ldconfig -p | grep libGL
 ldconfig -p | grep libEGL
 
-echo '
+echo "
 
 x() {
 
-    xvfb-run manimgl test.py -sw -r 1080x1080
+    xvfb-run manimgl '$1' -sw -r 1080x1080
 
 }
 
-' >> ~/.bashrc
+" >> ~/.bashrc
 
 source ~/.bashrc
 
