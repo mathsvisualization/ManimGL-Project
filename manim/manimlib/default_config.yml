@@ -51,7 +51,7 @@ window:
   # size: (1920, 1080)  # Specific size, in pixels
 camera:
   resolution: (1920, 1080)
-  background_color: "#333333"
+  background_color: "#000000"
   fps: 30
   background_opacity: 1.0
 file_writer:
@@ -60,8 +60,8 @@ file_writer:
   # Parameters to pass into ffmpeg
   video_codec: "libx264"
   pixel_format: "yuv420p"
-  saturation: 1.0
-  gamma: 1.0
+  saturation: 1.5
+  gamma: 1.2
 # Most of the scene configuration will come from CLI arguments,
 # but defaults can be set here
 scene:
@@ -86,8 +86,8 @@ tex:
   font_size_for_unit_height: 144
 text:
   # font: "Cambria Math"
-  font: "Consolas"
-  alignment: "LEFT"
+  font: "CMU Serif"
+  alignment: "CENTER"
   # The font size at which Text("0") has a height of 1 manim unit
   font_size_for_unit_height: 144
 embed:
