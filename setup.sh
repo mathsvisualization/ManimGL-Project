@@ -33,7 +33,7 @@ echo '
 
 x() {
 
-    xvfb-run manimgl test.py -sw 1080x1080
+    xvfb-run manimgl test.py -sw -r 1080x1080
 
 }
 
