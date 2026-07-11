@@ -52,7 +52,8 @@ class Paid(InteractiveScene):
             "Lecture Notes",
             "Research Papers",
             "Beginners to Advanced Resources",
-            font_size=24
+            buff=SMALL_BUFF,
+            font_size=26
         )
         itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF)
         self.add(itm)
