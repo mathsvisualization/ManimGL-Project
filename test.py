@@ -26,5 +26,7 @@ class Paid(InteractiveScene):
         cir = Circle(radius=0.1)
         cir.set_stroke(width=1, color=WHITE)
         pg.move_to(cir)
-        pg.set_height(cir.get_height() *0.5)
+        pg.set_height(cir.get_height() * 0.5)
+        vg = VGroup(cir, pg)
+        vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
         self.add(cir, pg)
