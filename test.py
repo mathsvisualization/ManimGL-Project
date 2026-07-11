@@ -32,3 +32,7 @@ class Paid(InteractiveScene):
         vg = VGroup(cir, pg)
         vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
         self.add(cir, pg)
+
+        title = TexText("Ultimate Learning Bundle (200GB+)", font_size=36)
+        title.next_to(v_line, RIGHT, aligned_edge=DOWN)
+        self.add(title)
