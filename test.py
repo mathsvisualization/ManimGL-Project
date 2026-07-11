@@ -21,3 +21,10 @@ class Paid(InteractiveScene):
         h_line.insert_n_curves(10)
         h_line.set_stroke(width=[0.5, 2, 2, 0.5])
         self.add(h_line)
+
+        pg = TexText("1")
+        cir = Circle(radius=0.5)
+        cir.set_stroke(width=1, color=WHITE)
+        pg.move_to(cir)
+        pg.set_height(cir.get_height() *0.5)
+        self.add(cir, pg)
