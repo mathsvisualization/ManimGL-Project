@@ -1,6 +1,7 @@
 from manimlib import *
 
 class Paid(InteractiveScene):
+    pgno = "1"
     def construct(self):
         logo = Tex(R"\langle \psi \rangle")
         logo.scale(0.8)
@@ -22,7 +23,7 @@ class Paid(InteractiveScene):
         h_line.set_stroke(width=[0.5, 2, 2, 0.5])
         self.add(h_line)
 
-        pg = TexText("1")
+        pg = TexText(str(self.pgno))
         cir = Circle(radius=0.1)
         cir.set_stroke(width=1, color=WHITE)
         cir.set_fill("#191919", 1.0)

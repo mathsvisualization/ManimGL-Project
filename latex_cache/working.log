@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=latex 2026.7.9)  11 JUL 2026 04:14
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=latex 2026.7.9)  11 JUL 2026 04:29
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -315,20 +315,18 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-Preview: Tightpage 0 0 0 0
-[1] (latex_cache/working.aux)
- ***********
-LaTeX2e <2023-11-01> patch level 1
-L3 programming layer <2024-01-22>
- ***********
- ) 
+! Missing $ inserted.
+<inserted text> 
+                $
+l.30 <bound method Scene.get_
+                             wait_time_progression of <test.Paid object at 0...
+ 
 Here is how much of TeX's memory you used:
- 8469 strings out of 476107
- 130477 string characters out of 5793960
+ 8460 strings out of 476107
+ 130316 string characters out of 5793960
  1922972 words of memory out of 5000000
- 30374 multiletter control sequences out of 15000+600000
+ 30368 multiletter control sequences out of 15000+600000
  562564 words of font info for 43 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
  79i,1n,93p,1016b,173s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-Output written on latex_cache/working.dvi (1 page, 1640 bytes).
+No pages of output.
