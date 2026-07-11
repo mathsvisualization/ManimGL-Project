@@ -10,7 +10,7 @@ class Paid(InteractiveScene):
 
         v_line = Line(UP, DOWN)
         v_line.set_height(logo.get_height() * 1.5)
-        v_line.next_to(logo, RIGHT, buff=SMALL_BUFF)
+        v_line.next_to(logo, RIGHT, buff=MED_SMALL_BUFF)
         v_line.insert_n_curves(10)
         v_line.set_stroke(width=[0.5, 1.5, 1.5, 0.5])
         self.add(v_line)
