@@ -17,7 +17,7 @@ class Paid(InteractiveScene):
 
         h_line = Line(LEFT, RIGHT)
         h_line.set_width(FRAME_WIDTH - 1)
-        h_line.to_edge(DOWN, buff=MED_LARGE_BUFF + SMALL_BUFF)
+        h_line.to_edge(DOWN, buff=MED_LARGE_BUFF + SMALL_BUFF * 0.5)
         h_line.insert_n_curves(10)
         h_line.set_stroke(width=[0.5, 2, 2, 0.5])
         self.add(h_line)
@@ -25,6 +25,7 @@ class Paid(InteractiveScene):
         pg = TexText("1")
         cir = Circle(radius=0.1)
         cir.set_stroke(width=1, color=WHITE)
+        cir.set_fill("#191919", 1.0)
         pg.move_to(cir)
         pg.set_height(cir.get_height() * 0.5)
         vg = VGroup(cir, pg)
