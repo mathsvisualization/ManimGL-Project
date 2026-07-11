@@ -37,5 +37,6 @@ class Paid(InteractiveScene):
         title.next_to(v_line, RIGHT)
         self.add(title)
 
-        cont = TexText("The Knowledge Vault")
-        self.add(cont)
+        cont = TexText(R"\# The Knowledge Vault")
+        cont_underline = Underline(cont, stroke_width=[0.5, 2, 2, 0.5])
+        self.add(cont, cont_underline)
