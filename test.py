@@ -29,5 +29,5 @@ class Paid(InteractiveScene):
         pg.move_to(cir)
         pg.set_height(cir.get_height() * 0.5)
         vg = VGroup(cir, pg)
-        vg.next_to(h_line, DOWN, buff=MED_SMALL_BUFF)
+        vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
         self.add(cir, pg)
