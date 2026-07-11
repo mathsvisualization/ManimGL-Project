@@ -160,11 +160,10 @@ if [[ "$TERM" == "xterm" ]]; then
     PROMPT_COMMAND="${PROMPT_COMMAND:+$PROMPT_COMMAND; }precmd"
 fi
 
-
 x() {
-
-    xvfb-run manimgl "$1" -sw -r 1080x1080
-
+    if xvfb-run manimgl "$1" -sw -r 1080x1080; then
+        clear
+    fi
 }
 
 
