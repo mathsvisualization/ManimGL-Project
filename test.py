@@ -41,3 +41,7 @@ class Paid(InteractiveScene):
         cont.next_to(title, DOWN, buff=LARGE_BUFF*0.7, aligned_edge=ORIGIN)
         cont_underline = Underline(cont, stroke_width=[0.5, 2, 2, 0.5])
         self.add(cont, cont_underline)
+
+        cont1 = TexText("100GB+ Curated Educational Library")
+        cont1.next_to(cont, DOWN, buff=MED_SMALL_BUFF, aligned_edge=DL)
+        self.add(cont1)
