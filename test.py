@@ -71,7 +71,8 @@ class Paid(InteractiveScene):
             $\bullet$ Chemistry\\
             $\bullet$ Quantum Mechanics\\
             $\bullet$ Astronomy\\
-            $\bullet$ Computer Science
+            $\bullet$ Computer Science \\
+            $\bullet$ Ai \& ML
 
             \vspace{0.8cm}
 
