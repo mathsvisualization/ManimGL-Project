@@ -51,7 +51,8 @@ class Paid(InteractiveScene):
             "Books",
             "Lecture Notes",
             "Research Papers",
-            "Beginners to Advanced Resources"
+            "Beginners to Advanced Resources",
+            font_size=36
         )
         itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF, aligned_edge=DL)
         self.add(itm)
