@@ -49,9 +49,9 @@ class Paid(InteractiveScene):
             \vspace{0.6cm}
 
             7000+ PDFs 
-            $\bullet$ Books 
-            $\bullet$ Lecture Notes 
-            $\bullet$ Research Papers
+            $\bullet$ Books \\ 
+            $\bullet$ Lecture Notes \\
+            $\bullet$ Research Papers\\
 
             \vspace{0.8cm}
 
