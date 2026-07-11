@@ -36,3 +36,42 @@ class Paid(InteractiveScene):
         title = TexText("Ultimate Learning Bundle (200GB+)", font_size=36)
         title.next_to(v_line, RIGHT)
         self.add(title)
+
+        content = TexText(
+             r"""
+            {\Huge \textbf{The Knowledge Vault}}
+
+          
+            \vspace{0.5cm}
+
+            {\Large 100GB+ Curated Educational Library}
+
+            \vspace{0.6cm}
+
+            5000+ PDFs $\bullet$ Books $\bullet$ Lecture Notes $\bullet$ Research Papers
+
+            \vspace{0.8cm}
+
+            Whether you're a student, self-learner, programmer,
+            researcher, or simply curious about science,
+            this collection brings thousands of carefully
+            organized educational resources together in one place.
+
+            \vspace{0.8cm}
+
+            \textbf{Inside you'll find:}
+
+            \vspace{0.3cm}
+
+            $\bullet$ Mathematics\\
+            $\bullet$ Physics\\
+            $\bullet$ Chemistry\\
+            $\bullet$ Quantum Mechanics\\
+            $\bullet$ Astronomy\\
+            $\bullet$ Computer Science
+
+            \vspace{0.8cm}
+
+            \textit{No endless searching. Everything is organized and ready to use.}
+            """,)
+        self.add(content)
