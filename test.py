@@ -47,12 +47,12 @@ class Paid(InteractiveScene):
             {\Large 200GB+ Curated Educational Library}
 
             \vspace{0.6cm}
-
+            \begin{flushleft}
             7000+ PDFs \\ 
             $\bullet$ Books \\ 
             $\bullet$ Lecture Notes \\
             $\bullet$ Research Papers\\
-
+            \end{flushleft}
             \vspace{0.8cm}
 
             Whether you're a student, self-learner, programmer,
