@@ -48,7 +48,10 @@ class Paid(InteractiveScene):
 
             \vspace{0.6cm}
 
-            5000+ PDFs $\bullet$ Books $\bullet$ Lecture Notes $\bullet$ Research Papers
+            7000+ PDFs 
+            $\bullet$ Books 
+            $\bullet$ Lecture Notes 
+            $\bullet$ Research Papers
 
             \vspace{0.8cm}
 
@@ -74,4 +77,5 @@ class Paid(InteractiveScene):
 
             \textit{No endless searching. Everything is organized and ready to use.}
             """,)
+        content.set_width(FRAME_WIDTH - 1)
         self.add(content)
