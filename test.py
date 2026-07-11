@@ -34,5 +34,5 @@ class Paid(InteractiveScene):
         self.add(cir, pg)
 
         title = TexText("Ultimate Learning Bundle (200GB+)", font_size=36)
-        title.next_to(v_line, RIGHT, aligned_edge=DOWN)
+        title.next_to(v_line, RIGHT)
         self.add(title)
