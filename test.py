@@ -33,11 +33,11 @@ class Paid(InteractiveScene):
         vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
         self.add(cir, pg)
 
-        title = TexText("Ultimate Learning Bundle (200GB+)", font_size=36)
+        title = TexText("Ultimate Learning Bundle (200GB+)", font_size=30)
         title.next_to(v_line, RIGHT)
         self.add(title)
 
-        cont = TexText(R"\# The Knowledge Vault")
+        cont = TexText(R"The Knowledge Vault")
         cont.next_to(title, DOWN, buff=LARGE_BUFF*0.7, aligned_edge=DL)
         cont_underline = Underline(cont, stroke_width=[0.5, 2, 2, 0.5])
         self.add(cont, cont_underline)
