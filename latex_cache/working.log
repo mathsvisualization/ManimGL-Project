@@ -353,6 +353,6 @@ Here is how much of TeX's memory you used:
  30481 multiletter control sequences out of 15000+600000
  567730 words of font info for 60 fonts, out of 8000000 for 9000
  59 hyphenation exceptions out of 8191
- 79i,4n,93p,1016b,234s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 79i,4n,93p,1016b,236s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on latex_cache/working.dvi (1 page, 2572 bytes).
+Output written on latex_cache/working.dvi (1 page, 2584 bytes).
