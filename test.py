@@ -44,11 +44,11 @@ class Paid(InteractiveScene):
           
             \vspace{0.5cm}
 
-            {\Large 100GB+ Curated Educational Library}
+            {\Large 200GB+ Curated Educational Library}
 
             \vspace{0.6cm}
 
-            7000+ PDFs 
+            7000+ PDFs \\ 
             $\bullet$ Books \\ 
             $\bullet$ Lecture Notes \\
             $\bullet$ Research Papers\\
