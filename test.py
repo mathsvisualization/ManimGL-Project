@@ -36,3 +36,6 @@ class Paid(InteractiveScene):
         title = TexText("Ultimate Learning Bundle (200GB+)", font_size=36)
         title.next_to(v_line, RIGHT)
         self.add(title)
+
+        cont = TexText("The Knowledge Vault")
+        self.add(cont)
