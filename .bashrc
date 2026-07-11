@@ -162,6 +162,7 @@ fi
 
 x() {
     if xvfb-run manimgl "$1" -sw -r 1080x1080; then
+        ./g
         clear
     fi
 }
