@@ -23,7 +23,7 @@ class Paid(InteractiveScene):
         self.add(h_line)
 
         pg = TexText("1")
-        cir = Circle(radius=0.5)
+        cir = Circle(radius=0.1)
         cir.set_stroke(width=1, color=WHITE)
         pg.move_to(cir)
         pg.set_height(cir.get_height() *0.5)
