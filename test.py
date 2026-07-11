@@ -17,7 +17,7 @@ class Paid(InteractiveScene):
 
         h_line = Line(LEFT, RIGHT)
         h_line.set_width(FRAME_WIDTH - 1)
-        h_line.to_edge(DOWN, buff=MED_LARGE_BUFF + SMALL_BUFF * 0.5)
+        h_line.to_edge(DOWN, buff=MED_LARGE_BUFF * 0.6 + SMALL_BUFF)
         h_line.insert_n_curves(10)
         h_line.set_stroke(width=[0.5, 2, 2, 0.5])
         self.add(h_line)
@@ -29,5 +29,5 @@ class Paid(InteractiveScene):
         pg.move_to(cir)
         pg.set_height(cir.get_height() * 0.5)
         vg = VGroup(cir, pg)
-        vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
+        vg.next_to(h_line, DOWN, buff=MED_SMALL_BUFF)
         self.add(cir, pg)
