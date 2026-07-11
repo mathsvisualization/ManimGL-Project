@@ -55,5 +55,5 @@ class Paid(InteractiveScene):
             buff=SMALL_BUFF,
             font_size=26
         )
-        itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF)
+        itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF, aligned_edge=LEFT)
         self.add(itm)
