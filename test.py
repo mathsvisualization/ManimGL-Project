@@ -16,8 +16,8 @@ class Paid(InteractiveScene):
         self.add(v_line)
 
         h_line = Line(LEFT, RIGHT)
-        v_line.set_width(FRAME_WIDTH - 2)
-        v_line.to_edge(DOWN, buff=MED_LARGE_BUFF)
-        v_line.insert_n_curves(10)
-        v_line.set_stroke(width=[0.5, 2, 2, 0.5])
-        self.add(v_line)
+        h_line.set_width(FRAME_WIDTH - 2)
+        h_line.to_edge(DOWN, buff=MED_LARGE_BUFF)
+        h_line.insert_n_curves(10)
+        h_line.set_stroke(width=[0.5, 2, 2, 0.5])
+        self.add(h_line)
