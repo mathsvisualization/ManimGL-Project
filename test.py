@@ -43,5 +43,5 @@ class Paid(InteractiveScene):
         self.add(cont, cont_underline)
 
         cont1 = TexText("100GB+ Curated Educational Library", font_size=36)
-        cont1.next_to(cont_underline, DOWN, buff=MED_SMALL_BUFF, aligned_edge=DL)
+        cont1.next_to(cont_underline, DOWN, buff=MED_LARGE_BUFF, aligned_edge=DL)
         self.add(cont1)
