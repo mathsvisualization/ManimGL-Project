@@ -2,6 +2,7 @@ from manimlib import *
 
 class Paid(InteractiveScene):
     pgno = "1"
+    title_0 = "Ultimate Learning Bundle (200+GB)"
     def construct(self):
         logo = Tex(R"\langle \psi \rangle")
         logo.scale(0.8)
@@ -33,7 +34,7 @@ class Paid(InteractiveScene):
         vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
         self.add(cir, pg)
 
-        title = TexText("Ultimate Learning Bundle (200GB+)", font_size=30)
+        title = TexText(str(self.title_0), font_size=30)
         title.next_to(v_line, RIGHT)
         self.add(title)
 
@@ -89,3 +90,9 @@ class Paid(InteractiveScene):
         inside[0].shift(LEFT * 0.5)
         inside.next_to(cont2, DOWN, aligned_edge=LEFT)
         self.add(inside)
+
+class Paid1(Paid):
+    pgno = "2"
+
+    def construct(self):
+        pass
