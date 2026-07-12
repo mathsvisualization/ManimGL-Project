@@ -85,6 +85,6 @@ class Paid(InteractiveScene):
             )
         )
         inside.arrange(DOWN, buff=SMALL_BUFF)
-        inside[0].shift(RIGHT * 0.5)
+        inside[0].shift(LEFT * 0.5)
         inside.next_to(cont2, DOWN, aligned_edge=LEFT)
         self.add(inside)
