@@ -81,9 +81,10 @@ class Paid(InteractiveScene):
                 "Computer Science",
                 "Ai \& ML",
                 buff=SMALL_BUFF,
-                font_size=26
+                font_size=24
             )
         )
+        inside.arrange(DOWN)
         inside[0].shift(RIGHT)
         inside.next_to(cont2, DOWN, aligned_edge=LEFT)
         self.add(inside)
