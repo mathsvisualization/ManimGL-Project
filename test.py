@@ -60,7 +60,7 @@ class Paid(InteractiveScene):
 
         cont2 = TexText(
             R"""
-            \begin{minipage}{0.78\textwidth}
+            \begin{minipage}{0.90\textwidth}
             Whether you're a student, self-learner, programmer,
             researcher, or simply curious about science, this
             collection brings thousands of carefully organized
