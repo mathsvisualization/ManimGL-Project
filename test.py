@@ -38,7 +38,7 @@ class Paid(InteractiveScene):
         self.add(title)
 
         cont = TexText(R"The Knowledge Vault")
-        cont.next_to(title, DOWN, buff=LARGE_BUFF*0.7, aligned_edge=ORIGIN)
+        cont.next_to(title, DOWN, buff=LARGE_BUFF * 0.5, aligned_edge=ORIGIN)
         cont_underline = Underline(cont, stroke_width=[0.5, 2, 2, 0.5])
         self.add(cont, cont_underline)
 
