@@ -69,3 +69,21 @@ class Paid(InteractiveScene):
         )
         cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF * 0.67, aligned_edge=LEFT)
         self.add(cont2)
+
+        inside = VGroup(
+            TexText("Inside you'll find:", font_size=26),
+            BulletedList(
+                "Mathematics",
+                "Physics",
+                "Chemistry",
+                "Quantum Mechanics",
+                "Astronomy",
+                "Computer Science",
+                "Ai \& ML",
+                buff=SMALL_BUFF,
+                font_size=26
+            )
+        )
+        inside[0].shift(RIGHT)
+        inside.next_to(cont2, DOWN, aligned_edge=LEFT)
+        self.add(inside)
