@@ -55,7 +55,7 @@ class Paid(InteractiveScene):
             buff=SMALL_BUFF,
             font_size=26
         )
-        itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF*0.67, aligned_edge=LEFT)
+        itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF * 0.67, aligned_edge=LEFT)
         self.add(itm)
 
         cont2 = TexText(
@@ -67,5 +67,5 @@ class Paid(InteractiveScene):
             resources together in one place\\
             """, font_size=20, alignment=R"\flushleft"
         )
-        cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF, aligned_edge=LEFT)
+        cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF * 0.67, aligned_edge=LEFT)
         self.add(cont2)
