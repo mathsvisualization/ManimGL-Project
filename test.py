@@ -84,7 +84,7 @@ class Paid(InteractiveScene):
                 font_size=24
             )
         )
-        inside.arrange(DOWN)
-        inside[0].shift(RIGHT)
+        inside.arrange(DOWN, buff=SMALL_BUFF)
+        inside[0].shift(LEFT)
         inside.next_to(cont2, DOWN, aligned_edge=LEFT)
         self.add(inside)
