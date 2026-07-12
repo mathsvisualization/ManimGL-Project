@@ -11,14 +11,14 @@ class PaidTemplate(InteractiveScene):
         logo.to_edge(UL, buff=MED_SMALL_BUFF)
         self.add(logo)
 
-        v_line = Line(UP, DOWN)
+        self.v_line = v_line = Line(UP, DOWN)
         v_line.set_height(logo.get_height() * 1.5)
         v_line.next_to(logo, RIGHT, buff=MED_SMALL_BUFF)
         v_line.insert_n_curves(10)
         v_line.set_stroke(width=[0.5, 1.5, 1.5, 0.5])
         self.add(v_line)
 
-        h_line = Line(LEFT, RIGHT)
+        self.h_line = h_line = Line(LEFT, RIGHT)
         h_line.set_width(FRAME_WIDTH - 1)
         h_line.to_edge(DOWN, buff=MED_LARGE_BUFF * 0.75 + SMALL_BUFF)
         h_line.insert_n_curves(10)
@@ -42,7 +42,7 @@ class Paid(PaidTemplate):
 
     def construct(self):
         title = TexText(str(self.title_0), font_size=30)
-        title.next_to(self.mobjects[1], RIGHT)  # v_line
+        title.next_to(self.v_line, RIGHT)  # v_line
         self.add(title)
 
         cont = TexText(R"The Knowledge Vault")
