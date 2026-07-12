@@ -57,3 +57,14 @@ class Paid(InteractiveScene):
         )
         itm.next_to(cont1, DOWN, buff=MED_LARGE_BUFF*0.67, aligned_edge=LEFT)
         self.add(itm)
+
+        cont2 = TexText(
+            """
+            Whether you're a student, self-learner, programmer,\\
+            researcher, or simply curious about science,\\
+            this collection brings thousands of carefully\\
+            organized educational resources together in one place\\
+            """
+        )
+        cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF, aligned_edge=LEFT)
+        self.add(cont2)
