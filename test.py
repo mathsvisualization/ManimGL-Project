@@ -79,7 +79,7 @@ class Paid(InteractiveScene):
                 "Quantum Mechanics",
                 "Astronomy",
                 "Computer Science",
-                "Ai \& ML",
+                R"Ai \& ML",
                 buff=SMALL_BUFF,
                 font_size=20
             )
