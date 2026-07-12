@@ -60,11 +60,11 @@ class Paid(InteractiveScene):
 
         cont2 = TexText(
             """
-            Whether you're a student, self-learner, \\ 
-            programmer, researcher, or simply curious \\
-            about science, this collection brings \\
+            Whether you're a student, self-learner,\\ 
+            programmer, researcher, or simply curious\\
+            about science, this collection brings\\
             thousands of carefully organized educational\\
-            resources together in one place \\
+            resources together in one place\\
             """, font_size=26, alignment=R"\flushleft"
         )
         cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF, aligned_edge=LEFT)
