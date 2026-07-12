@@ -42,8 +42,8 @@ class Paid(InteractiveScene):
         cont_underline = Underline(cont, stroke_width=[0.5, 2, 2, 0.5])
         self.add(cont, cont_underline)
 
-        cont1 = TexText("200GB+ Curated Educational Library", font_size=36)
-        cont1.next_to(cont_underline, DOWN, buff=MED_LARGE_BUFF, aligned_edge=DL)
+        cont1 = TexText("200GB+ Curated Educational Library", font_size=30)
+        cont1.next_to(cont_underline, DOWN, buff=MED_LARGE_BUFF)
         self.add(cont1)
 
         itm = BulletedList(
@@ -79,7 +79,7 @@ class Paid(InteractiveScene):
                 "Quantum Mechanics",
                 "Astronomy",
                 "Computer Science",
-                R"Ai \& ML",
+                R"Artificial Intelligence \& Machine Learning",
                 buff=SMALL_BUFF,
                 font_size=20
             )
