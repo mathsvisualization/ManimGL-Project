@@ -59,13 +59,14 @@ class Paid(InteractiveScene):
         self.add(itm)
 
         cont2 = TexText(
-            """
-            Whether you're a student, self-learner,\\ 
-            programmer, researcher, or simply curious\\
-            about science, this collection brings\\
-            thousands of carefully organized educational\\
-            resources together in one place\\
-            """, font_size=20, alignment=R"\flushleft"
+            R"""
+            \begin{minipage}{0.78\textwidth}
+            Whether you're a student, self-learner, programmer,
+            researcher, or simply curious about science, this
+            collection brings thousands of carefully organized
+            educational resources together in one place.
+            \end{minipage}
+            """, font_size=20,
         )
         cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF * 0.67, aligned_edge=LEFT)
         self.add(cont2)
