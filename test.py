@@ -1,9 +1,10 @@
 from manimlib import *
 
-class Paid(InteractiveScene):
+class PaidTemplate(InteractiveScene):
     pgno = "1"
-    title_0 = "Ultimate Learning Bundle (200+GB)"
-    def construct(self):
+
+    def setup(self):
+        super().setup()
         logo = Tex(R"\langle \psi \rangle")
         logo.scale(0.8)
         logo.set_color(PURPLE_A)
@@ -32,10 +33,16 @@ class Paid(InteractiveScene):
         pg.set_height(cir.get_height() * 0.5)
         vg = VGroup(cir, pg)
         vg.next_to(h_line, DOWN, buff=SMALL_BUFF)
-        self.add(cir, pg)
+        self.add(vg)
 
+
+class Paid(PaidTemplate):
+    pgno = "1"
+    title_0 = "Ultimate Learning Bundle (200+GB)"
+
+    def construct(self):
         title = TexText(str(self.title_0), font_size=30)
-        title.next_to(v_line, RIGHT)
+        title.next_to(self.mobjects[1], RIGHT)  # v_line
         self.add(title)
 
         cont = TexText(R"The Knowledge Vault")
@@ -67,7 +74,8 @@ class Paid(InteractiveScene):
             collection brings thousands of carefully organized
             educational resources together in one place.
             \end{minipage}
-            """, font_size=20,
+            """,
+            font_size=20,
         )
         cont2.next_to(itm, DOWN, buff=MED_LARGE_BUFF * 0.45, aligned_edge=LEFT)
         self.add(cont2)
@@ -91,8 +99,10 @@ class Paid(InteractiveScene):
         inside.next_to(cont2, DOWN, aligned_edge=LEFT)
         self.add(inside)
 
-class Paid1(Paid):
+
+class Paid1(PaidTemplate):
     pgno = "2"
 
     def construct(self):
+        # Page 2 content
         pass
