@@ -1,1 +1,1 @@
-xvfb-run manimgl test1.py -sw -r 3840x3840 -c "#141414"
+xvfb-run manimgl t.py -sw -r 3840x3840
