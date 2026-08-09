@@ -9,6 +9,8 @@ except PackageNotFoundError:
     __version__ = "unknown"
 
 
+from manimlib.config import manim_config
+
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
@@ -37,6 +39,7 @@ from manimlib.camera.camera import *
 from manimlib.mobject.boolean_ops import *
 from manimlib.mobject.changing import *
 from manimlib.mobject.coordinate_systems import *
+from manimlib.mobject.fractals import *
 from manimlib.mobject.frame import *
 from manimlib.mobject.functions import *
 from manimlib.mobject.geometry import *

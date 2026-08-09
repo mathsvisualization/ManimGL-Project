@@ -112,7 +112,8 @@ class Paid2(PaidTemplate):
 
         why_body = TexText(
             r"""
-            $\checkmark$ Save hundreds of hours searching for quality resources.\\[0.25cm]
+            $\checkmark$ Save hundreds of hours searching for\\
+            \hspace*{0.45cm}quality resources.\\[0.25cm]
             $\checkmark$ Beginner to Advanced learning materials.\\[0.25cm]
             $\checkmark$ Books, Lecture Notes, and Research Papers.\\[0.25cm]
             $\checkmark$ Carefully organized folders for easy navigation.\\[0.25cm]
@@ -122,7 +123,7 @@ class Paid2(PaidTemplate):
             \hspace*{0.45cm}educators, and enthusiasts.
             """, alignment=r"\flushleft", font_size=28,
         )
-        why_body.next_to(why, DOWN, aligned_edge=LEFT)
+        why_body.next_to(why, DOWN, aligned_edge=LEFT).shift(0.05*LEFT)
         self.add(why_body)
 
 class Pricing(PaidTemplate):
@@ -130,7 +131,7 @@ class Pricing(PaidTemplate):
     
     def construct(self):
         price = TexText(R"\$ Pricing").scale(1.2)
-        price.next_to(self.title, DOWN, buff=LARGE_BUFF * 0.8)
+        price.next_to(self.title, DOWN, buff=LARGE_BUFF * 0.8).shift(0.5 * LEFT)
         under = Underline(price, stroke_width=[0.5, 1.5, 1.5, 0.5])
         self.add(price, under)
         pricing = TexText(r"""
@@ -144,15 +145,15 @@ class Pricing(PaidTemplate):
             Computer Science & \$8.99\\[0.3cm]
             \textbf{Full Bundle (200GB+)} & \textbf{\$29.99}
             \end{tabular}
-            """, font_size=38)
+            """, font_size=30)
         pricing.next_to(price, DOWN, buff=MED_LARGE_BUFF)
         self.add(pricing)
 
 class Payment(PaidTemplate):
-    pgno = 4
+    pgno = "4"
 
     def construct(self):
-        title = TexText(R"Interested?").scale(0.8)
+        title = TexText(R"Interested?").scale(0.7)
         title.next_to(self.logo, DOWN, buff=LARGE_BUFF * 0.85, aligned_edge=LEFT).shift(RIGHT * 0.1)
         under = Underline(title, stroke_width=[0.5, 1.5, 1.5, 0.5])
         self.add(title, under)
@@ -160,21 +161,21 @@ class Payment(PaidTemplate):
         body = TexText(
             r"""
             DM or Comment with:\\[0.25cm]
-            \textbf{MATH}\\[0.1cm]
-            \textbf{PHYSICS}\\[0.1cm]
-            \textbf{CHEMISTRY}\\[0.1cm]
-            \textbf{QUANTUM}\\[0.1cm]
-            \textbf{ASTRONOMY}\\[0.1cm]
-            \textbf{AI \& ML}\\[0.1cm]
-            \textbf{COMPUTER SCIENCE}\\[0.1cm]
+            \textbf{MATH}\\[0.25cm]
+            \textbf{PHYSICS}\\[0.25cm]
+            \textbf{CHEMISTRY}\\[0.25cm]
+            \textbf{QUANTUM}\\[0.25cm]
+            \textbf{ASTRONOMY}\\[0.25cm]
+            \textbf{AI \& ML}\\[0.25cm]
+            \textbf{COMPUTER SCIENCE}\\[0.25cm]
             \textbf{FULL (Recommended)}
-            """, isolate=['FULL (Recommended)'], alignment=R"\flushleft", font_size=28,
+            """, isolate=['FULL (Recommended)'], alignment=R"\flushleft", font_size=20,
         )
         body['FULL (Recommended)'].set_color(YELLOW)
         body.next_to(title, DOWN, buff=MED_LARGE_BUFF * 0.67, aligned_edge=LEFT)
         self.add(body)
 
-        payment = TexText(R"Payment Methods $\checkmark$").scale(0.8)
+        payment = TexText(R"Payment Methods $\checkmark$").scale(0.7)
         payment[-1].set_color(GREEN)
 
         payment_un = Line(LEFT, RIGHT)
@@ -182,16 +183,16 @@ class Payment(PaidTemplate):
         payment_un.insert_n_curves(10)
         payment_un.set_stroke(width=[0.5, 1.5, 1.5, 0.5])
         payment_un.next_to(under, RIGHT, buff=LARGE_BUFF * 0.85)
-        payment.next_to(payment_un, UP, buff=SMALL_BUFF)
+        payment.next_to(payment_un, UP, buff=SMALL_BUFF).shift(0.15 * LEFT)
         self.add(payment, payment_un)
 
         svgs = VGroup(
-            SVGMobject("paypal.svg"),
-            SVGMobject("upi.svg"),
-            SVGMobject("debit.svg").set_color(WHITE)
+            SVGMobject("./lmao/paypal.svg"),
+            SVGMobject("./lmao/upi.svg"),
+            SVGMobject("./lmao/debit.svg").set_color(WHITE)
         )
         svgs.scale(0.4)
-        svgs.arrange(DOWN, buff=MED_SMALL_BUFF, aligned_edge=LEFT)
+        svgs.arrange(DOWN, buff=MED_LARGE_BUFF * 0.8, aligned_edge=LEFT)
         svgs.next_to(payment, DOWN, aligned_edge=LEFT)
         svgs[1][0].set_color(WHITE)
         svgs[1][1].set_color(WHITE)
@@ -199,23 +200,23 @@ class Payment(PaidTemplate):
 
         info = TexText(
             r"""
-            $\checkmark$ Instant delivery after payment.\\
-            $\checkmark$ Secure cloud download link.\\
-            $\checkmark$ Lifetime access to purchased content.\\
+            $\checkmark$ Instant delivery after payment.\\[0.25cm]
+            $\checkmark$ Secure cloud download link.\\[0.25cm]
+            $\checkmark$ Lifetime access to purchased content.\\[0.25cm]
             $\checkmark$ Free future updates (where applicable).
             """, alignment=R"\flushleft",
-            font_size=26,
+            font_size=22,
         )
         info.next_to(body, DOWN, aligned_edge=LEFT)
         self.add(info)
 
         dis = TexText("For educational purposes only.")
-        dis.scale(0.25)
+        dis.scale(0.20)
         dis.next_to(self.h_line.get_start(), DOWN, buff=MED_SMALL_BUFF * 0.67, aligned_edge=DL)
         self.add(dis)
 
         dis2 = TexText(R"Digital product $\cdot$ No physical shipping.")
-        dis2.scale(0.25)
+        dis2.scale(0.20)
         dis2.next_to(self.h_line.get_end(), DOWN, buff=MED_SMALL_BUFF * 0.67, aligned_edge=DR)
         self.add(dis2)
 
@@ -230,7 +231,7 @@ class Dis(PaidTemplate):
         self.add(t, under)
         dis = TexText(
             R"""
-            \begin{minipage}{0.41\textwidth}
+            \begin{minipage}{0.33\textwidth}
             This collection contains educational resources gathered and organized
             for convenience. I do not claim ownership of any third-party copyrighted
             content. All rights remain with their respective authors, publishers,
@@ -238,5 +239,6 @@ class Dis(PaidTemplate):
             \end{minipage}
             """, alignment=R"\flushleft"
         )
+        dis.set_width(FRAME_WIDTH - 1)
         dis.next_to(t, DOWN, buff=MED_LARGE_BUFF, aligned_edge=LEFT)
         self.add(dis)

@@ -10,7 +10,6 @@ from contextlib import ExitStack
 
 import numpy as np
 from tqdm.auto import tqdm as ProgressDisplay
-from pyglet.window import key as PygletWindowKeys
 
 from manimlib.animation.animation import prepare_animation
 from manimlib.camera.camera import Camera
@@ -18,6 +17,8 @@ from manimlib.camera.camera_frame import CameraFrame
 from manimlib.config import manim_config
 from manimlib.event_handler import EVENT_DISPATCHER
 from manimlib.event_handler.event_type import EventType
+from manimlib.event_keys import Keys
+from manimlib.event_keys import Mods
 from manimlib.logger import log
 from manimlib.mobject.mobject import _AnimationBuilder
 from manimlib.mobject.mobject import Group
@@ -31,7 +32,6 @@ from manimlib.scene.scene_file_writer import SceneFileWriter
 from manimlib.utils.dict_ops import merge_dicts_recursively
 from manimlib.utils.family_ops import extract_mobject_family_members
 from manimlib.utils.family_ops import recursive_mobject_remove
-from manimlib.utils.iterables import batch_by_property
 from manimlib.utils.sounds import play_sound
 from manimlib.utils.color import color_to_rgba
 from manimlib.window import Window
@@ -100,7 +100,7 @@ class Scene(object):
         self.window = window
         if self.window:
             self.window.init_for_scene(self)
-            # Make sure camera and Pyglet window sync
+            # Make sure the camera and the window sync
             self.camera_config["fps"] = 30
 
         # Core state of the scene
@@ -115,7 +115,6 @@ class Scene(object):
 
         self.file_writer = SceneFileWriter(self, **self.file_writer_config)
         self.mobjects: list[Mobject] = [self.camera.frame]
-        self.render_groups: list[Mobject] = []
         self.id_to_mobject_map: dict[int, Mobject] = dict()
         self.num_plays: int = 0
         self.time: float = 0
@@ -185,9 +184,8 @@ class Scene(object):
 
     def interact(self) -> None:
         """
-        If there is a window, enter a loop
-        which updates the frame while under
-        the hood calling the pyglet event loop
+        If there is a window, enter a loop which updates the frame, each of those
+        pulling whatever events the window has to report
         """
         if self.window is None:
             return
@@ -221,13 +219,13 @@ class Scene(object):
     # Only these methods should touch the camera
 
     def get_image(self) -> Image:
-        if self.window is not None:
-            self.camera.use_window_fbo(False)
-            self.camera.capture(*self.render_groups)
-        image = self.camera.get_image()
-        if self.window is not None:
-            self.camera.use_window_fbo(True)
-        return image
+        if self.window is None:
+            return self.camera.get_image()
+        # A window has the camera drawing at its size, so the frame has to be drawn again
+        # at the resolution an image of it is meant to come out at
+        with self.camera.at_output_resolution():
+            self.camera.capture(*self.mobjects)
+            return self.camera.get_image()
 
     def show(self) -> None:
         self.update_frame(force_draw=True)
@@ -245,10 +243,10 @@ class Scene(object):
         if self.window and dt == 0 and not self.window.has_undrawn_event() and not force_draw:
             # In this case, there's no need for new rendering, but we
             # shoudl still listen for new events
-            self.window._window.dispatch_events()
+            self.window.poll_events()
             return
 
-        self.camera.capture(*self.render_groups)
+        self.camera.capture(*self.mobjects)
 
         if self.window and not self.skip_animations:
             vt = self.time - self.virtual_animation_start_time
@@ -257,13 +255,16 @@ class Scene(object):
 
     def emit_frame(self) -> None:
         if not self.skip_animations:
-            self.file_writer.write_frame(self.camera)
+            self.file_writer.write_frame()
 
     # Related to updating
 
     def update_mobjects(self, dt: float) -> None:
         for mobject in self.mobjects:
-            mobject.update(dt)
+            # The frame rate is passed in so that if dt spans multiple frames,
+            # as it does when animations are skipped, time based updaters are
+            # still called once per frame that would have been rendered
+            mobject.update(dt, frame_rate=self.camera.fps)
 
     def should_update_mobjects(self) -> bool:
         return self.always_update_mobjects or any(
@@ -297,30 +298,11 @@ class Scene(object):
     def get_mobject_family_members(self) -> list[Mobject]:
         return extract_mobject_family_members(self.mobjects)
 
-    def assemble_render_groups(self):
-        """
-        Rendering can be more efficient when mobjects of the
-        same type are grouped together, so this function creates
-        Groups of all clusters of adjacent Mobjects in the scene
-        """
-        batches = batch_by_property(
-            self.mobjects,
-            lambda m: str(type(m)) + str(m.get_shader_wrapper(self.camera.ctx).get_id()) + str(m.z_index)
-        )
-
-        for group in self.render_groups:
-            group.clear()
-        self.render_groups = [
-            batch[0].get_group_class()(*batch)
-            for batch, key in batches
-        ]
-
     @staticmethod
     def affects_mobject_list(func: Callable[..., T]) -> Callable[..., T]:
         @wraps(func)
         def wrapper(self, *args, **kwargs):
             func(self, *args, **kwargs)
-            self.assemble_render_groups()
             return self
         return wrapper
 
@@ -568,10 +550,9 @@ class Scene(object):
         for animation in animations:
             animation.finish()
             animation.clean_up_from_scene(self)
-        if self.skip_animations:
-            self.update_mobjects(self.get_run_time(animations))
-        else:
-            self.update_mobjects(0)
+        # Note that the passage of time during the animation, including
+        # for the case of skipped animations, is handled by update_frame
+        self.update_mobjects(0)
 
     @affects_mobject_list
     def play(
@@ -703,13 +684,12 @@ class Scene(object):
 
     @contextmanager
     def temp_record(self):
-        self.camera.use_window_fbo(False)
-        self.file_writer.begin_insert()
-        try:
-            yield
-        finally:
-            self.file_writer.end_insert()
-            self.camera.use_window_fbo(True)
+        with self.camera.at_output_resolution():
+            self.file_writer.begin_insert()
+            try:
+                yield
+            finally:
+                self.file_writer.end_insert()
 
     def temp_config_change(self, skip=False, record=False, progress_bar=False):
         stack = ExitStack()
@@ -842,15 +822,15 @@ class Scene(object):
 
         if char == manim_config.key_bindings.reset:
             self.play(self.camera.frame.animate.to_default_state())
-        elif char == "z" and (modifiers & (PygletWindowKeys.MOD_COMMAND | PygletWindowKeys.MOD_CTRL)):
+        elif char == "z" and (modifiers & Mods.CTRL_OR_CMD):
             self.undo()
-        elif char == "z" and (modifiers & (PygletWindowKeys.MOD_COMMAND | PygletWindowKeys.MOD_CTRL | PygletWindowKeys.MOD_SHIFT)):
+        elif char == "z" and (modifiers & (Mods.CTRL_OR_CMD | Mods.SHIFT)):
             self.redo()
         # command + q
-        elif char == manim_config.key_bindings.quit and (modifiers & (PygletWindowKeys.MOD_COMMAND | PygletWindowKeys.MOD_CTRL)):
+        elif char == manim_config.key_bindings.quit and (modifiers & Mods.CTRL_OR_CMD):
             self.quit_interaction = True
         # Space or right arrow
-        elif char == " " or symbol == PygletWindowKeys.RIGHT:
+        elif char == " " or symbol == Keys.RIGHT:
             self.hold_on_wait = False
 
     def on_resize(self, width: int, height: int) -> None:
@@ -934,8 +914,15 @@ class ThreeDScene(Scene):
 
     def add(self, *mobjects: Mobject, set_depth_test: bool = True, perp_stroke: bool = True):
         for mob in mobjects:
-            if set_depth_test and not mob.is_fixed_in_frame() and self.always_depth_test:
-                mob.apply_depth_test()
+            # Asked of each member of the family in turn, rather than of what holds them.
+            # A group has a say of its own on being fixed in frame, which is nothing to do
+            # with what it holds, and animations wrap what they are given in a fresh one,
+            # so text fixed in frame would otherwise find itself depth tested for the
+            # length of a FadeTransform, and vanish behind whatever it was written over.
+            if set_depth_test and self.always_depth_test:
+                for sm in mob.get_family():
+                    if not sm.is_fixed_in_frame():
+                        sm.apply_depth_test(recurse=False)
             if isinstance(mob, VMobject) and mob.has_stroke() and perp_stroke:
                 mob.set_flat_stroke(False)
         super().add(*mobjects)

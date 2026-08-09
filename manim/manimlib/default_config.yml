@@ -50,6 +50,13 @@ window:
   # position: (500, 500)  # Specific position, in pixel coordinates, for upper right corner
   # size: (1920, 1080)  # Specific size, in pixels
 camera:
+  # A frame's draws are recorded and replayed for as long as the sequence of them holds, see
+  # DrawList. Turning this off makes every draw afresh each frame, which says the same thing
+  # more slowly.
+  record_draws: True
+  # Mobjects which one draw could cover are gathered and drawn together, see DrawList.group.
+  # Turning this off draws each on its own, which says the same thing more slowly.
+  draw_together: True
   resolution: (1920, 1080)
   background_color: "#000000"
   fps: 30
@@ -62,6 +69,11 @@ file_writer:
   pixel_format: "yuv420p"
   saturation: 1.0
   gamma: 1.0
+  # For a render nothing is going to be measured against, the encoder's own default is
+  # plenty. To keep every pixel exactly as it was drawn, say
+  #   video_codec: "libx264rgb"
+  #   pixel_format: "rgb24"
+  #   crf: 0
 # Most of the scene configuration will come from CLI arguments,
 # but defaults can be set here
 scene:
@@ -86,7 +98,7 @@ tex:
   font_size_for_unit_height: 144
 text:
   # font: "Cambria Math"
-  font: "CMU Serif"
+  font: "Consolas"
   alignment: "LEFT"
   # The font size at which Text("0") has a height of 1 manim unit
   font_size_for_unit_height: 144
