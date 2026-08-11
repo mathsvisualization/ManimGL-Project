@@ -35,6 +35,7 @@ from manimlib.utils.iterables import resize_array
 from manimlib.utils.iterables import resize_with_interpolation
 from manimlib.utils.iterables import resize_preserving_order
 from manimlib.utils.space_ops import angle_between_vectors
+from manimlib.utils.space_ops import boxes_are_disjoint
 from manimlib.utils.space_ops import get_norm
 from manimlib.utils.space_ops import get_unit_normal
 from manimlib.utils.space_ops import line_intersects_path
@@ -43,9 +44,9 @@ from manimlib.utils.space_ops import normalize
 from manimlib.utils.space_ops import rotation_between_vectors
 from manimlib.utils.space_ops import rotation_matrix_transpose
 from manimlib.utils.space_ops import poly_line_length
-from manimlib.renderer.shader_program import VProgram
-from manimlib.utils.shaders import COMMON_UNIFORMS
-from manimlib.utils.shaders import uniform_block_dtype
+from manimlib.renderer.drawing import VDrawing
+from manimlib.renderer.uniform_block import COMMON_UNIFORMS
+from manimlib.renderer.uniform_block import uniform_block_dtype
 
 from typing import TYPE_CHECKING
 from typing import Generic, TypeVar, Iterable
@@ -60,7 +61,7 @@ GRADIENT_POINT_KEYS = ['gradient_start', 'gradient_end']
 
 
 class VMobject(Mobject):
-    program_class: type = VProgram
+    drawing_class: type = VDrawing
     structural_data_keys = ['subpath_range']
     data_dtype: np.dtype = np.dtype([
         ('point', np.float32, (3,)),
@@ -131,9 +132,87 @@ class VMobject(Mobject):
 
         self.needs_new_unit_normal = True
 
-        self.shader_program_type = None
+        self.shader_code_target = None
+        # Which set of mobjects this one's fill has been promised not to overlap
+        self.fill_group: VMobject | None = None
 
         super().__init__(**kwargs)
+
+    def draw_fills_together(self, draw_together: bool = True) -> Self:
+        """
+        Promises that these mobjects' filled regions do not overlap one another, which lets
+        one draw cover the lot of them rather than three passes each, see VDrawing.can_follow.
+        A page of text drawn this way is a handful of draws rather than one per glyph.
+
+        The promise is kept against this mobject in particular, so two groups which have each
+        made it are still drawn apart: glyphs of one string are laid out by the typesetter and
+        really do not overlap, while two strings laid over one another say nothing of the sort.
+
+        Broken, what changes is the overlap: filled once between them rather than each blending
+        in turn. For opaque fills that is the same picture, and for partly transparent ones it
+        is a lighter one.
+        """
+        group = self if draw_together else None
+        for mob in self.get_family():
+            mob.fill_group = group
+        return self
+
+    def draw_fills_together_if_disjoint(self) -> Self:
+        """
+        Looks at where the filled members of this family sit, and makes the promise of
+        draw_fills_together when none of them meet, so that a group laid out with room
+        between its members is drawn together without anyone having to say so.
+
+        What is compared is bounding boxes, so two shapes which do not overlap but whose
+        boxes do are taken to, which costs a few draws and never the picture. And what is
+        answered is how things stand now, so a group moved about or added to afterwards
+        is worth asking again.
+        """
+        filled = [
+            mob for mob in self.get_family()
+            if mob.has_points() and mob.has_fill()
+        ]
+        # Each member's own points rather than its bounding box, which for one holding
+        # submobjects covers them too and would have it overlap its own children
+        boxes = np.array([
+            [points.min(0), points.max(0)]
+            for points in (mob.get_points() for mob in filled)
+        ]).reshape((len(filled), 2, self.dim))
+        if boxes_are_disjoint(boxes[:, 0], boxes[:, 1]):
+            return self.draw_fills_together(True)
+        # Nothing to promise here, but one made about some smaller group, a string's
+        # glyphs say, is about a family this says nothing of and still holds. Only this
+        # mobject's own promise, which the layout no longer bears out, is dropped.
+        for mob in self.get_family():
+            if mob.fill_group is self:
+                mob.fill_group = None
+        return self
+
+    def get_grid(self, *args, **kwargs) -> Self:
+        """
+        Copies laid out apart from one another, so unless the layout crowds them their
+        fills may share a draw.
+        """
+        return super().get_grid(*args, **kwargs).draw_fills_together_if_disjoint()
+
+    def copy(self, deep: bool = False) -> Self:
+        """
+        A copy is a group of its own. Left pointing at what it was copied from, its fills
+        would be taken to be disjoint from that original's, which a copy laid over the thing
+        it copies is the opposite of.
+        """
+        result = super().copy(deep)
+        if deep:
+            return result
+        originals = self.get_family()
+        copies = result.get_family()
+        if len(originals) != len(copies):
+            return result
+        matching = {id(mob): copies[index] for index, mob in enumerate(originals)}
+        for mob in copies:
+            if mob.fill_group is not None:
+                mob.fill_group = matching.get(id(mob.fill_group))
+        return result
 
     def get_group_class(self):
         return VGroup
@@ -256,15 +335,13 @@ class VMobject(Mobject):
 
         if width is not None:
             for mob in self.get_family(recurse):
-                data = mob.data.rows_or_defaults
-                if isinstance(width, (float, int, np.floating)):
-                    data['stroke_width'][:, 0] = width
-                else:
-                    data['stroke_width'][:, 0] = resize_with_interpolation(
-                        np.array(width), len(data)
-                    ).flatten()
-                # That column is written into rather than replaced
-                mob.data.note_change()
+                with mob.data.being_written() as data:
+                    if isinstance(width, (float, int, np.floating)):
+                        data['stroke_width'][:, 0] = width
+                    else:
+                        data['stroke_width'][:, 0] = resize_with_interpolation(
+                            np.array(width), len(data)
+                        ).flatten()
 
         if behind is not None:
             for mob in self.get_family(recurse):
@@ -387,11 +464,11 @@ class VMobject(Mobject):
         self.set_stroke(color=colors)
         return self
 
-    def set_color_by_code(self, wgsl_code: str, program_type: str | None = None) -> Self:
+    def set_color_by_code(self, wgsl_code: str, code_target: str | None = None) -> Self:
         self.replace_shader_code(
             "///// INSERT COLOR FUNCTION HERE /////",
             wgsl_code,
-            program_type
+            code_target
         )
         return self
 
@@ -399,11 +476,16 @@ class VMobject(Mobject):
         self,
         old: str,
         new: str,
-        program_type: str | None = None
+        code_target: str | None = None
     ) -> Self:
-        if program_type is not None:
+        """
+        A snippet naming a field of one of the two shaders, stroke_rgba say, would not compile
+        against the other, so code_target says which of "fill" and "stroke" it is meant for.
+        Left out, it goes to both, see VDrawing.module_specs.
+        """
+        if code_target is not None:
             for mob in self.get_family():
-                mob.shader_program_type = program_type
+                mob.shader_code_target = code_target
         # Which records the replacement against every member of the family
         super().replace_shader_code(old, new)
         return self
@@ -882,13 +964,13 @@ class VMobject(Mobject):
             return self
         ends = self.get_subpath_end_indices_from_points(points)
         starts = [0, *(ends[:-1] + 2)]
-        ranges = self.data["subpath_range"]
-        for start, end in zip(starts, ends):
-            # Reaching one past the end takes in the null curve's handle sitting
-            # there, which belongs to no subpath, so that every point gets written
-            ranges[start:end + 2] = (-start, end)
-        ranges += np.arange(len(points))[:, np.newaxis] * (1, -1)
-        self.data.note_change()
+        with self.data.being_written() as data:
+            ranges = data["subpath_range"]
+            for start, end in zip(starts, ends):
+                # Reaching one past the end takes in the null curve's handle sitting
+                # there, which belongs to no subpath, so that every point gets written
+                ranges[start:end + 2] = (-start, end)
+            ranges += np.arange(len(points))[:, np.newaxis] * (1, -1)
         return self
 
     def get_subpath_range(self, index: int = -1) -> Tuple[int, int]:
@@ -1234,8 +1316,8 @@ class VMobject(Mobject):
             # Move the null curve marking the end of each subpath, so that it still
             # marks an end once the order of the points is flipped
             inner_ends = mob.get_subpath_end_indices()[:-1]
-            mob.data["point"][inner_ends + 1] = mob.data["point"][inner_ends + 2]
-            mob.data.note_change()
+            with mob.data.being_written() as data:
+                data["point"][inner_ends + 1] = data["point"][inner_ends + 2]
             mob.uniforms["unit_normal"] = -mob.uniforms["unit_normal"]
         super().reverse_points()
         for mob in self.get_family(recurse):
