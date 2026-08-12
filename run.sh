@@ -1,2 +1,2 @@
-xvfb-run manimgl t.py -w -r 3840x3840
+xvfb-run manimgl t.py -w -r 3840x2160
 ./g

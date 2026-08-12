@@ -2,6 +2,6 @@ from manimlib import *
 
 class Test(InteractiveScene):
     def construct(self):
-        t = TexText("B")
-        t.set_width(FRAME_WIDTH - 1)
-        self.play(Write(t))
+        eq = TexText("e^{i\\pi} = -1", font_size=56)
+        self.play(Write(eq), run_time=3)
+        self.wait(2)
