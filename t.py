@@ -1,7 +1,7 @@
 from manimlib import *
 
 
-class Independence80(Scene):
+class Independence80(InteractiveScene):
     def construct(self):
 
         title = Text(
