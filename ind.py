@@ -59,5 +59,10 @@ class Identity(InteractiveScene):
             i.set_stroke(color, 2)
             i.round_corners(0.1)
 
-        self.play(Transform(equ, new_equ), Transform(surs[0], new_surs[0]), Transform(surs[1], new_surs[1]))
+        self.play(
+            Transform(equ["6^{x + 5}"], new_equ[R"6^x \cdot 6^5"]),
+            Transform(equ["5^{x + 5}"], new_equ[R"5^x \cdot 5^5"]),
+            Transform(surs[0], new_surs[0]),
+            Transform(surs[1], new_surs[1])
+        )
         self.wait()
