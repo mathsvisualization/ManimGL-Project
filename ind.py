@@ -31,7 +31,7 @@ class Identity(InteractiveScene):
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
         )
         self.play(
-            ShowCreationThenDestruction(SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5).round_corners(0.1).set_stroke(color, 2), run_time=2)
+            ShowCreationThenDestruction(SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5).round_corners(0.1).set_stroke(color, 2), run_time=4)
         )
 
         surs = VGroup(
@@ -49,7 +49,7 @@ class Identity(InteractiveScene):
 
         new_equ = Tex(R"6^x \cdot 6^5 = 5^x \cdot 5^5")
         new_equ.match_style(equ)
-        new_equ.shift(UP)
+        new_equ.move_to(equ)
 
         new_surs = VGroup(
             SurroundingRectangle(new_equ[R"6^x \cdot 6^5"]),
@@ -59,5 +59,5 @@ class Identity(InteractiveScene):
             i.set_stroke(color, 2)
             i.round_corners(0.1)
 
-        self.play(FadeTransform(equ, new_equ), Transform(surs[0], new_surs[0]), Transform(surs[1], new_surs[1]))
+        self.play(Transform(equ, new_equ), Transform(surs[0], new_surs[0]), Transform(surs[1], new_surs[1]))
         self.wait()
