@@ -19,7 +19,7 @@ class Identity(InteractiveScene):
             equ.animate.shift(UP * 1),
             run_time=0.67
         )
-        self.wait(0.5)
+        self.wait(1)
 
         remb = VGroup(
             TexText("Remember:"),
@@ -29,7 +29,7 @@ class Identity(InteractiveScene):
         remb_b = SurroundingRectangle(remb)
         remb_b.set_stroke(ORANGE, 2)
         remb_b.round_corners(0.1)
-        remb[1].shift(UP)
+        remb[1].shift(UP * 0.5)
 
         self.play(
             LaggedStart(FadeIn(remb, DOWN * 0.5), lag_ratio=0.25),
