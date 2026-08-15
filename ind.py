@@ -46,3 +46,10 @@ class Identity(InteractiveScene):
         self.play(ShowCreation(surs[-1]))
         self.play(TransformFromCopy(surs[-1], surs[0]), TransformFromCopy(surs[-1], surs[1]))
         self.wait()
+
+        new_equ = Tex(R"6^x \cdot 6^5 = 5^x \cdot 5^5")
+        new_equ.match_style(equ)
+        new_equ.move_to(equ)
+
+        self.play(FadeTransform(equ, new_equ), Transform(surs[0], new_equ[R"6^x \cdot 6^5"]), Transform(surs[1], new_equ[R"5^x \cdot 5^5"]))
+        self.wait()
