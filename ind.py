@@ -35,11 +35,9 @@ class Identity(InteractiveScene):
             ShowCreation(r_s),
             lag_ratio=1
         )
-        self.add(r_s.copy())
-        self.remove(r_s)
         self.wait()
 
         surs = SurroundingRectangle(equ[:4])
         surs.set_stroke(color, 2)
-        self.play(ShowCreation(surs))
+        self.play(TransformFromCopy(r_s, surs))
         self.wait()
