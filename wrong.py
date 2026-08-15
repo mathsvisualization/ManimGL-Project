@@ -14,7 +14,7 @@ class WhatDidYouSee(InteractiveScene):
         )
         self.wait(3)
         self.play(
-            TransformMatchingTex(
+            FadeTransform(
                 equ_c, equ,
             ),
             run_time=3
