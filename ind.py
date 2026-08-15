@@ -37,7 +37,7 @@ class Identity(InteractiveScene):
         )
         self.wait()
 
-        surs = SurroundingRectangle(equ["6^{x + 5}"])
+        surs = SurroundingRectangle(equ[:4])
         surs.set_stroke(color, 2)
         self.play(ShowCreation(surs))
         self.wait()
