@@ -3,7 +3,7 @@ from manimlib import *
 class Identity(InteractiveScene):
     def construct(self):
         color = [PURPLE_A, PURPLE_C]
-        equ = Tex(R"6^{x + 5} = 5^{x + 5}")
+        equ = Tex("6^{x + 5} = 5^{x + 5}")
         equ.shift(UP)
         equ.set_color(color)
         
