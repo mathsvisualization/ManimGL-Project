@@ -32,7 +32,7 @@ class Identity(InteractiveScene):
         remb[1].shift(UP * 0.5).scale(0.95)
 
         self.play(
-            LaggedStart(Write(remb[0]), FadeIn(remb[1], UP * 0.2), lag_ratio=0.25),
+            LaggedStart(Write(remb[1]), FadeIn(remb[0], UP * 0.2), lag_ratio=0.25),
             ShowCreation(remb_b)
         )
         self.wait()
