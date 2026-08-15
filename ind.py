@@ -39,14 +39,14 @@ class Identity(InteractiveScene):
         self.wait()
 
         idt = VGroup(
-            SurroundingRectangle(equ["6^{x + 5}"]).round_corners(0.1),
-            SurroundingRectangle(equ["5^{x + 5}"]).round_corners(0.1),
-            SurroundingRectangle(remb[1]["a^m + a^n"]).round_corners(0.1)
+            SurroundingRectangle(equ["6^{x + 5}"]).round_corners(0.99),
+            SurroundingRectangle(equ["5^{x + 5}"]).round_corners(0.99),
+            SurroundingRectangle(remb[1]["a^m + a^n"]).round_corners(0.99)
         )
         for i in idt:
             i.set_stroke(color, 2)
 
         self.play(
-            AnimationGroup(ShowCreation(idt))
+            ShowCreation(idt, lag_ratio=1)
         )
         self.wait()
