@@ -36,6 +36,7 @@ class Identity(InteractiveScene):
             lag_ratio=1
         )
         self.wait()
+        self.play(Uncreate(r_s))
 
         surs = SurroundingRectangle(equ[:4])
         surs.set_stroke(color, 2)
