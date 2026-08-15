@@ -26,7 +26,7 @@ class Identity(InteractiveScene):
             Tex(R"a^{m + n} = a^m + a^n").set_color(color)
         )
         remb.arrange(DOWN, buff=LARGE_BUFF)
-        remb_b = SurroundingRectangle(remb, buff=MED_LARGE_BUFF)
+        remb_b = SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5)
         remb_b.set_stroke(color, 2)
         remb_b.round_corners(0.1)
 
@@ -36,4 +36,3 @@ class Identity(InteractiveScene):
             lag_ratio=1
         )
         self.wait()
-        
