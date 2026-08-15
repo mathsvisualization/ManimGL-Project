@@ -49,7 +49,15 @@ class Identity(InteractiveScene):
 
         new_equ = Tex(R"6^x \cdot 6^5 = 5^x \cdot 5^5")
         new_equ.match_style(equ)
-        new_equ.move_to(equ)
+        new_equ.shift(UP)
 
-        self.play(FadeTransform(equ, new_equ), Transform(surs[0], new_equ[R"6^x \cdot 6^5"]), Transform(surs[1], new_equ[R"5^x \cdot 5^5"]))
+        new_surs = VGroup(
+            SurroundingRectangle(new_equ[R"6^x \cdot 6^5"]),
+            SurroundingRectangle(new_equ[R"5^x \cdot 5^5"])
+        )
+        for i in new_surs:
+            i.set_stroke(color, 2)
+            i.round_corners(0.1)
+
+        self.play(FadeTransform(equ, new_equ), Transform(surs[0], new_surs[0]), Transform(surs[1], new_surs[1]))
         self.wait()
