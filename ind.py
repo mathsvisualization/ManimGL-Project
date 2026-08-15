@@ -45,7 +45,7 @@ class Identity(InteractiveScene):
         )
         for i in idt:
             i.set_stroke(color, 2)
-            i.round_corners(0.15)
+            i.round_corners(
         self.play(
             ShowCreation(idt, lag_ratio=1)
         )
