@@ -44,14 +44,8 @@ class Identity(InteractiveScene):
             SurroundingRectangle(remb[1]["a^m + a^n"])
         )
         self.play(
-            FadeIn(idt[0]),
-            FadeIn(idt[1]),
-            FadeIn(idt[2]),
-            run_time=0.5
-        )
-        """self.play(
             ShowCreation(idt[0]),
             ShowCreation(idt[1]),
             ShowCreation(idt[2])
         )
-        self.wait()"""
+        self.wait()
