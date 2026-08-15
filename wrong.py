@@ -2,19 +2,19 @@ from manimlib import *
 
 class WhatDidYouSee(InteractiveScene):
     def construct(self):
-        what = TexText("What did you see?")
-        what.shift(UP * 1.5)
+        what = TexText("What did you see?", font_size=40)
+        what.shift(UP * 2)
 
-        equ = Tex(R"\int x dx = \frac{x^2}{2} - C")
+        equ = Tex(R"\int x dx = \frac{x^2}{2} - C", font_size=40).set_color([PURPLE_A, PURPLE_C])
         equ_c = equ.copy()[:-1]
 
         self.play(
-            Write(equ),
+            Write(equ_c),
             FadeIn(what, UP * 0.5)
         )
         self.wait()
         self.play(
-            Transform(equ, equ_c),
+            Transform(equ_c, equ),
             run_time=2
         )
         self.wait()
