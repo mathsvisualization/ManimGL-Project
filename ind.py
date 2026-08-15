@@ -50,3 +50,4 @@ class Identity(InteractiveScene):
             ShowCreation(idt, lag_ratio=1)
         )
         self.wait()
+        print(len(idt))
