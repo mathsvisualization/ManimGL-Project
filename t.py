@@ -10,7 +10,7 @@ class Independence80(InteractiveScene):
         ).to_edge(UP)
 
         self.play(Write(title))
-        self.wait(1)
+        self.wait(0.3)
 
         expression = Tex(r"\frac{8!}{7!}\cdot\frac{\Gamma(3)}{\Gamma(2)}\cdot\binom{5}{2}\cdot\left(\zeta(0)+1\right)", font_size=48)
 

@@ -1,37 +1,38 @@
 from manimlib import *
 
-class Independensday(InteractiveScene):
+class Identity(InteractiveScene):
     def construct(self):
-        tex1 = TexText("Can mathematics reveal a number?")
-        tex1.set_width(FRAME_WIDTH - 1.5)
-        self.play(Write(tex1), run_time=1.5)
+        color = [PURPLE_A, PURPLE_C]
+        equ = Tex(R"6^{x + 5} = 5^{x + 5}")
+        equ.shift(UP)
+        equ.set_color(color)
+        
+        ax = Tex("x = ?")
+        ax.next_to(equ, DOWN, buff=MED_LARGE_BUFF)
+        ax.set_color(color)
+
+        self.play(LaggedStart(Write(equ), FadeIn(ax, UP * 0.5), lag_ratio=0.67))
         self.wait()
 
-        self.play(tex1.animate.to_edge(UP, buff=MED_LARGE_BUFF))
-        self.wait()
-
-        expression = Tex(R"\frac{8!}{7!}\cdot\frac{\Gamma(3)}{\Gamma(2)}\cdot\binom{5}{2}\cdot\left(\zeta(0)+1\right)")
-        expression.set_width(FRAME_WIDTH - 2)
-        self.play(Write(expression))
-
-        expression_box = SurroundingRectangle(
-            expression,
-            buff=SMALL_BUFF,
-            color=YELLOW
-        )
-        expression_box.set_stroke(width=2)
         self.play(
-            ShowCreation(expression_box),
-            run_time=1.5
+            FadeOut(ax, DOWN * 1),
+            equ.animate.shift(UP * 1),
+            run_time=0.67
         )
         self.wait(0.5)
-        self.play(
-            expression.animate.shift(2.2 * UP),
-            expression_box.animate.shift(2.2 * UP)
+
+        remb = VGroup(
+            TexText("Remember:"),
+            Tex(R"a^{m + n} = a^m + a^n").set_color(color)
         )
+        remb.arrange(DOWN, buff=LARGE_BUFF)
+        remb_b = SurroundingRectangle(remb)
+        remb_b.set_stroke(ORANGE, 2)
+        remb_b.round_corners(0.1)
+        remb[1].shift(UP)
+
         self.play(
-            Uncreate(
-                expression_box
-            )
+            LaggedStart(FadeIn(remb, DOWN * 0.5), lag_ratio=0.25),
+            ShowCreation(remb_b)
         )
         self.wait()
