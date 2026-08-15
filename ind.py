@@ -43,9 +43,6 @@ class Identity(InteractiveScene):
             SurroundingRectangle(equ["5^{x + 5}"]),
             SurroundingRectangle(remb[1]["a^m + a^n"])
         )
-        for i in idt:
-            i.set_stroke(color, 2)
-
         self.play(
             ShowCreation(idt[0]),
             ShowCreation(idt[1]),
