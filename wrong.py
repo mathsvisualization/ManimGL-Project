@@ -5,7 +5,7 @@ class WhatDidYouSee(InteractiveScene):
         what = TexText("What did you see?", font_size=40)
         what.shift(UP * 2)
 
-        equ = Tex(R"\int x /; dx = \frac{x^2}{2} - C", font_size=40).set_color([PURPLE_A, PURPLE_C])
+        equ = Tex(R"\int x \; dx = \frac{x^2}{2} - C", font_size=40).set_color([PURPLE_A, PURPLE_C])
         equ_c = equ.copy()[:-2]
 
         self.play(
