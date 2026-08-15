@@ -47,6 +47,8 @@ class Identity(InteractiveScene):
             i.set_stroke(color, 2)
 
         self.play(
-            ShowCreation(idt, lag_ratio=1)
+            ShowCreation(idt[0]),
+            ShowCreation(idt[1]),
+            ShowCreation(idt[2])
         )
         self.wait()
