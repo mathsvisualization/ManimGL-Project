@@ -16,7 +16,6 @@ class WhatDidYouSee(InteractiveScene):
         self.play(
             TransformMatchingTex(
                 equ_c, equ,
-                key_map={"-": " "}
             ),
             run_time=3
         )
