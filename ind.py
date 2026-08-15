@@ -20,20 +20,14 @@ class Identity(InteractiveScene):
             run_time=0.67
         )
         self.wait(0.1)
-        self.play(ShowCreation(SurroundingRectangle(equ[:4])))
 
-        """remb = VGroup(
+        remb = VGroup(
             TexText("Remember:"),
             Tex(R"a^{m + n} = a^m + a^n").set_color(color)
         )
         remb.arrange(DOWN, buff=LARGE_BUFF)
-        remb_b = SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5)
-        remb_b.set_stroke(color, 2)
-        remb_b.round_corners(0.1)
-
         self.play(
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
-            ShowCreation(remb_b),
             lag_ratio=1
         )
         self.wait()
@@ -41,4 +35,4 @@ class Identity(InteractiveScene):
         surs = SurroundingRectangle(equ[:4])
         surs.set_stroke(color, 2)
         self.play(ShowCreation(surs))
-        self.wait()"""
+        self.wait()
