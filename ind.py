@@ -13,9 +13,8 @@ class Identity(InteractiveScene):
 
         self.play(LaggedStart(Write(equ), FadeIn(ax, UP * 0.5), lag_ratio=0.67))
         self.wait()
-        self.play(ShowCreation(SurroundingRectangle(equ[:4])))
 
-        """self.play(
+        self.play(
             FadeOut(ax, DOWN * 1),
             equ.animate.shift(UP * 1),
             run_time=0.67
@@ -37,8 +36,10 @@ class Identity(InteractiveScene):
             lag_ratio=1
         )
         self.wait()
+        self.play(ShowCreation(SurroundingRectangle(equ[:4])))
 
-        surs = SurroundingRectangle(equ[:4])
+
+        """surs = SurroundingRectangle(equ[:4])
         surs.set_stroke(color, 2)
         self.play(ShowCreation(surs))
         self.wait()"""
