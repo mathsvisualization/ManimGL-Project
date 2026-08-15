@@ -51,4 +51,4 @@ class Identity(InteractiveScene):
         )
         self.wait()
         print("xxxxxxx")
-        print(len(idt))
+        print(len(idt[0]))
