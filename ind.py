@@ -27,7 +27,7 @@ class Identity(InteractiveScene):
         )
         remb.arrange(DOWN, buff=LARGE_BUFF)
 
-        r_s = SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.4)
+        r_s = SurroundingRectangle(remb.copy(), buff=MED_LARGE_BUFF * 0.4)
         r_s.set_stroke(color, 2)
         r_s.round_corners(0.1)
 
