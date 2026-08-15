@@ -31,7 +31,7 @@ class Identity(InteractiveScene):
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
         )
         self.play(
-            AnimationOnSurroundingRectangle(remb, 2, color, MED_LARGE_BUFF * 0.5)
+            ShowCreationThenDestruction(SurroundingRectangle(remb, 2, color, MED_LARGE_BUFF * 0.5).round_corners(0.1))
         )
         self.wait()
 
