@@ -35,7 +35,8 @@ class Identity(InteractiveScene):
             ShowCreation(r_s),
             lag_ratio=1
         )
-        self.add(r_s)
+        self.add(r_s.copy())
+        self.remove(r_s)
         self.wait()
 
         surs = SurroundingRectangle(equ[:4])
