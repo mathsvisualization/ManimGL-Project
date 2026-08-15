@@ -23,7 +23,7 @@ class Identity(InteractiveScene):
 
         remb = VGroup(
             TexText("Remember:"),
-            Tex(R"a^{m + n} = a^m + a^n").set_color(color)
+            Tex(R"a^{m + n} = a^m \cdot a^n").set_color(color)
         )
         remb.arrange(DOWN, buff=LARGE_BUFF)
 
@@ -41,7 +41,7 @@ class Identity(InteractiveScene):
         surs = VGroup(
             SurroundingRectangle(equ["6^{x + 5}"]),
             SurroundingRectangle(equ["5^{x + 5}"]),
-            SurroundingRectangle(remb[1]["a^m + a^n"])
+            SurroundingRectangle(remb[1][R"a^m \cdot a^n"])
         )
         for sur in surs:
             sur.set_stroke(color, 2)
