@@ -46,8 +46,8 @@ class Identity(InteractiveScene):
         self.play(
             FadeIn(idt[0]),
             FadeIn(idt[1]),
-           FadeIn(idt[2]),
-           run_time=0.5
+            FadeIn(idt[2]),
+            run_time=0.5
         )
         """self.play(
             ShowCreation(idt[0]),
