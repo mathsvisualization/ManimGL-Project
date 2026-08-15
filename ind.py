@@ -27,14 +27,9 @@ class Identity(InteractiveScene):
         )
         remb.arrange(DOWN, buff=LARGE_BUFF)
 
-        r_s = SurroundingRectangle(remb.copy(), buff=MED_LARGE_BUFF * 0.4)
-        r_s.set_stroke(color, 2)
-        r_s.round_corners(0.1)
-
         self.play(
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
-            ShowCreation(r_s),
-            lag_ratio=1
+            AnimationOnSurroundingRectangle(remb, 2, color, MED_LARGE_BUFF * 0.5)
         )
         self.wait()
 
