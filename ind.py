@@ -36,11 +36,4 @@ class Identity(InteractiveScene):
             lag_ratio=1
         )
         self.wait()
-
-        idt = VGroup(
-            SurroundingRectangle(equ["6^{x + 5}"]),
-            SurroundingRectangle(equ["5^{x + 5}"]),
-            SurroundingRectangle(remb[1]["a^m + a^n"])
-        )
-        self.play(ShowCreation(idt))
-        self.wait()
+        
