@@ -29,6 +29,7 @@ class Identity(InteractiveScene):
 
         r_s = SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.4)
         r_s.set_stroke(color, 2)
+        r_s.round_corners(0.1)
 
         self.play(
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
@@ -37,7 +38,15 @@ class Identity(InteractiveScene):
         )
         self.wait()
 
-        surs = SurroundingRectangle(equ[:4])
-        surs.set_stroke(color, 2)
-        self.play(TransformFromCopy(r_s, surs))
+        surs = VGroup(
+            SurroundingRectangle(equ["6^{x + 5}"]),
+            SurroundingRectangle(equ["5^{x + 5}"]),
+            SurroundingRectangle(remb[1]["a^m + a^n"])
+        )
+        for sur in surs:
+            sur.set_stroke(color, 2)
+            sur.round_corners(0.1)
+
+        self.play(ShowCreation(surs[-1]))
+        self.play(TransformFromCopy(surs[-1], surs[0]), TransformFromCopy(surs[-1], surs[1]))
         self.wait()
