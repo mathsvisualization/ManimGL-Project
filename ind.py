@@ -31,9 +31,8 @@ class Identity(InteractiveScene):
             LaggedStart(FadeIn(remb[0], UP * 0.2), Write(remb[1]), lag_ratio=0.25),
         )
         self.play(
-            ShowCreationThenDestruction(SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5).round_corners(0.1).set_stroke(color, 2))
+            ShowCreationThenDestruction(SurroundingRectangle(remb, buff=MED_LARGE_BUFF * 0.5).round_corners(0.1).set_stroke(color, 2), run_time=2)
         )
-        self.wait()
 
         surs = VGroup(
             SurroundingRectangle(equ["6^{x + 5}"]),
