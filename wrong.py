@@ -21,8 +21,7 @@ class WhatDidYouSee(InteractiveScene):
                 equ_c, equ[:-2],
             ),
             Write(equ[-2:]),
-            Write(see),
-            lag_ratio=0.25,
-            run_time=1
+            FadeIn(see),
+            run_time=1.5
         )
-        self.wait(2)
+        self.wait(3)
