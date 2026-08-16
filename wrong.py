@@ -17,7 +17,7 @@ class WhatDidYouSee(InteractiveScene):
             Transform(
                 equ_c, equ[:-2],
             ),
-            Write(equ[-2:])
+            Write(equ[-2:]),
             run_time=1
         )
         self.wait(2)
