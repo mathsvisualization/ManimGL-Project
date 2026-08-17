@@ -30,7 +30,6 @@ class WhatDidYouSee(InteractiveScene):
 
         self.play(
             Transform(equ, main_part),
-            FadeIn(minus_c),
             FadeIn(see),
             run_time=1.5
         )
