@@ -23,10 +23,10 @@ class Identity(InteractiveScene):
             TexText("Remember", font_size=40),
             Tex(R"a^{m + n} = a^m \cdot a^n", font_size=40)
         )
-        remember.arrange(DOWN)
+        remember.arrange(DOWN, buff=MED_LARGE_BUFF)
         remember.set_submobject_colors_by_gradient(color)
 
-        remember_rect = SurroundingRectangle(remember, buff=MED_LARGE_BUFF * 0.7, stroke_width=2, stroke_color=color)
+        remember_rect = SurroundingRectangle(remember, buff=MED_LARGE_BUFF * 0.7, stroke_width=3, stroke_color=color)
         remember_rect.round_corners(0.05)
 
         self.play(
