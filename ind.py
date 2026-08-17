@@ -43,9 +43,8 @@ class Identity(InteractiveScene):
         all_rect = VGroup(rect1, rect2, rect3)
 
         self.play(
-            LaggedStart(
-            *(ShowCreation(rect) for rect in all_rect),
-            lag_ratio=0.25,
-            )
+            ShowCreation(all_rect),
+            Animation(equ),
+            Animation(remember)
         )
         self.wait()
