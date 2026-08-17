@@ -26,7 +26,7 @@ class Identity(InteractiveScene):
         remember.arrange(DOWN, buff=MED_LARGE_BUFF * 1.1)
         remember.set_submobject_colors_by_gradient(color)
 
-        remember_rect = SurroundingRectangle(remember, buff=MED_LARGE_BUFF * 0.25, stroke_width=3, stroke_color=color)
+        remember_rect = SurroundingRectangle(remember, buff=MED_LARGE_BUFF * 0.35, stroke_width=3, stroke_color=color)
         remember_rect.round_corners(0.05)
 
         self.play(
