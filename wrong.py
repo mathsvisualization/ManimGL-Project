@@ -20,7 +20,7 @@ class WhatDidYouSee(InteractiveScene):
             Transform(
                 equ, equ_c[:-2],
             ),
-            FadeIn(equ_c[-2:]),
+            FadeIn(equ_c["- C"]),
             FadeIn(see),
             run_time=1.5
         )
