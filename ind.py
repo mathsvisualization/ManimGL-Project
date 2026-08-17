@@ -34,3 +34,19 @@ class Identity(InteractiveScene):
             LaggedStart(Write(remember[0]), FadeIn(remember[1], shift=UP * 0.5), lag_ratio=0.25)
         )
         self.wait()
+
+        rect_equ = ["6^{x + 5}", "5^{x + 5}", R"a^m \cdot a^n"]
+        rect1 = SurroundingRectangle(equ[rect_equ[0]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF).round_corners(0.05)
+        rect2 = SurroundingRectangle(equ[rect_equ[1]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF).
+        rect3 = SurroundingRectangle(remember[rect_equ[2]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF)
+
+        all_react = VGroup(rect1, rect2, rect3)
+
+        self.play(
+            LaggedStart(
+                ShowCreation(all_react),
+                lag_ratio=0.25,
+                group_type=VGroup,
+            )
+        )
+        self.wait()
