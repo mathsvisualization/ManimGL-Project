@@ -22,8 +22,6 @@ class WhatDidYouSee(InteractiveScene):
         minus_c = equ_c["- C"]
         main_part = equ_c[:-2]
 
-        minus_c.set_opacity(0)
-
         self.play(
             Write(equ),
             FadeIn(what, UP * 0.5)
