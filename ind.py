@@ -12,3 +12,9 @@ class Identity(InteractiveScene):
 
         self.play(LaggedStart(Write(equ), FadeIn(xequal, shift=UP * 0.5), lag_ratio=0.5))
         self.wait()
+
+        self.play(
+            equ.animate.shift(2.0 * UP),
+            FadeOut(xequal, shift=DOWN*0.5)
+        )
+        self.wait()
