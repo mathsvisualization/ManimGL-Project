@@ -24,4 +24,4 @@ class WhatDidYouSee(InteractiveScene):
             FadeIn(see),
             run_time=1.5
         )
-        self.wait(3) 
+        self.wait(3)
