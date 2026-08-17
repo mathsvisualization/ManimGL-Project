@@ -10,5 +10,5 @@ class Identity(InteractiveScene):
         xequal.set_color(color)
         xequal.next_to(equ, DOWN, buff=MED_LARGE_BUFF*1.1)
 
-        self.play(Write(equ), FadeIn(xequal, shift=UP * 0.5), lag_ratio=0.5)
+        self.play(LaggedStart(Write(equ), FadeIn(xequal, shift=UP * 0.5), lag_ratio=0.5))
         self.wait()
