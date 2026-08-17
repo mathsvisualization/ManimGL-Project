@@ -31,6 +31,6 @@ class Identity(InteractiveScene):
 
         self.play(
             ShowCreation(remember_rect),
-            LaggedStart(Write(remember[0]), FadeIn(remember[1], shift=UP * 0.5), lag_ratio=0.5)
+            LaggedStart(Write(remember[0]), FadeIn(remember[1], shift=UP * 0.5), lag_ratio=0.25)
         )
         self.wait()
