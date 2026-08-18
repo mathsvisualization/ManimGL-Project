@@ -90,9 +90,9 @@ class Identity(InteractiveScene):
         frac_equ.set_color(color)
 
         self.play(
-            Transform(new_equ["="][0], frac_equ["="][0], remover=True),
-            Transform(new_equ["6^x"][0], frac_equ["6^x"][0], remover=True),
-            Transform(new_equ["5^x"][0], frac_equ["5^x"][0], remover=True),
+            Transform(new_equ["="], frac_equ["="], remover=True),
+            Transform(new_equ["6^x"], frac_equ["6^x"], remover=True),
+            Transform(new_equ["5^x"], frac_equ["5^x"], remover=True),
             Transform(new_equ[R"\cdot"][0], frac_equ[2], remover=True),
         )
         self.add(frac_equ)
