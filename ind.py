@@ -103,3 +103,7 @@ class Identity(InteractiveScene):
         )
         self.add(frac_equ)
         self.wait()
+        self.play(
+            frac_equ.animate.shift(2.0 * UP)
+        )
+        self.wait()
