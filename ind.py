@@ -118,7 +118,7 @@ class Identity(InteractiveScene):
 
         self.play(
             Write(frac_igp[0]),
-            FadeIn(frac_igp, shift=DOWN * 0.5),
+            FadeIn(frac_igp[1], shift=DOWN * 0.5),
             ShowCreation(frac_igp_rect)
         )
         self.wait()
