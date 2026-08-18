@@ -49,4 +49,21 @@ class Identity(InteractiveScene):
                 run_time=2
             )
         )
-        self.wait(
+        self.wait()
+
+        new_equ = Tex(R"6^x \cdot 6^5 = 5^x \cdot 5^5")
+        new_equ.shift(2.0 * UP)
+        new_equ.set_color(color)
+
+        all_rects = VGroup(
+            SurroundingRectangle(new_equ[R"6^x \cdot 6^5"], stroke_width=3, stroke_color=color).round_corners(0.05)
+        )
+
+        self.play(
+            Transform(equ["6^{x"], new_equ["6^x"]),
+            FadeIn(new_equ[R"\cdot"][0]),
+            FadeOut(equ["+"][0]),
+            Transform(equ["6"][0], new_equ["6"]),
+            Transform(equ["5"][0], new_equ["5"][0])
+        )
+        self.wait()
