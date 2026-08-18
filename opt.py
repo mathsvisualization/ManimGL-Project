@@ -108,4 +108,4 @@ class OPT(InteractiveScene):
 
         self.play(*transforms)
 
-        self.wait()
+        self.wait(2)
