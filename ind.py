@@ -75,3 +75,9 @@ class Identity(InteractiveScene):
             ReplacementTransform(rect2, all_rects[1]),
         )
         self.wait()
+
+        self.play(
+            FadeOut(remember),
+            FadeOut(remember_rect)
+        )
+        self.wait()
