@@ -117,9 +117,9 @@ class Identity(InteractiveScene):
         frac_igp_rect = SurroundingRectangle(frac_igp, stroke_width=3, stroke_color=color).round_corners(0.05)
 
         frac_rects = VGroup(
-            SurroundingRectangle(frac_equ[R"\frac{6^x}{5^x}"], stroke_width=3, stroke_color=color).round_corners(0.05),
-            SurroundingRectangle(frac_equ[R"\frac{5^5}{6^5}"], stroke_width=3, stroke_color=color).round_corners(0.05),
-            SurroundingRectangle(frac_igp[1][R"\left( \frac{a}{b} \right)^n"], stroke_width=3, stroke_color=color).round_corners(0.05),
+            SurroundingRectangle(frac_equ[R"\frac{6^x}{5^x}"][0], stroke_width=3, stroke_color=color).round_corners(0.05),
+            SurroundingRectangle(frac_equ[R"\frac{5^5}{6^5}"][0], stroke_width=3, stroke_color=color).round_corners(0.05),
+            SurroundingRectangle(frac_igp[1][R"\left( \frac{a}{b} \right)^n"][0], stroke_width=3, stroke_color=color).round_corners(0.05),
         )
 
         self.play(
@@ -128,7 +128,6 @@ class Identity(InteractiveScene):
             ShowCreation(frac_igp_rect)
         )
         self.wait()
-        self.add(frac_igp_rect)
         self.play(
             ShowCreation(frac_rects)
         )
