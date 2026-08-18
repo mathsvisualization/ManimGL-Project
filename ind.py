@@ -63,17 +63,18 @@ class Identity(InteractiveScene):
         self.play(
             Transform(equ["6^{x"][0], new_equ["6^x"][0], remover=True),
             ReplacementTransform(rect1, all_rects[0]),
-            FadeIn(new_equ[R"\cdot"][0]),
+            FadeIn(new_equ[R"\cdot"][0], remover=True),
             FadeOut(equ["+"][0]),
             Transform(equ["6"][0].copy(), new_equ["6"][1], remover=True),
             Transform(equ["5"][0], new_equ["5"][0], remover=True),
             Transform(equ["5^{x"][0], new_equ["5^x"][0], remover=True),
             Transform(equ["5"][1].copy(), new_equ["5"][2], remover=True),
-            FadeIn(new_equ[R"\cdot"][1]),
+            FadeIn(new_equ[R"\cdot"][1], remover=True),
             FadeOut(equ["+"][1]),
             Transform(equ["5"][-1], new_equ["5"][-1], remover=True),
             ReplacementTransform(rect2, all_rects[1]),
         )
+        self.add(equ, new_equ)
         self.wait()
 
         self.play(
