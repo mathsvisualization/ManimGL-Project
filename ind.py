@@ -128,6 +128,7 @@ class Identity(InteractiveScene):
             ShowCreation(frac_igp_rect)
         )
         self.wait()
+        self.add(frac_igp_rect)
         self.play(
             ShowCreation(frac_rects)
         )
