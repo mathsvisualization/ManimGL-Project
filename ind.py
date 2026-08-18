@@ -60,10 +60,11 @@ class Identity(InteractiveScene):
         )
 
         self.play(
-            Transform(equ["6^{x"], new_equ["6^x"]),
+            Transform(equ["6^{x"][0], new_equ["6^x"][0]),
+            ReplacementTransform(rect1, all_rect[0]),
             FadeIn(new_equ[R"\cdot"][0]),
             FadeOut(equ["+"][0]),
-            Transform(equ["6"][0], new_equ["6"]),
+            Transform(equ["6"][0], new_equ["6"][0]),
             Transform(equ["5"][0], new_equ["5"][0])
         )
         self.wait()
