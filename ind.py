@@ -78,6 +78,7 @@ class Identity(InteractiveScene):
 
         self.play(
             FadeOut(remember),
-            FadeOut(remember_rect)
+            FadeOut(remember_rect),
+            FadeOut(rect3),
         )
         self.wait()
