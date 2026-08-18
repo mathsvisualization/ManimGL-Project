@@ -134,5 +134,5 @@ class Identity(InteractiveScene):
                 lag_ratio=0,
                 rate_func=linear,
             )
-        )""""""
+        )"""
         self.wait()
