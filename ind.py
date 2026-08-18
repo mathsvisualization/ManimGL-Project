@@ -64,7 +64,7 @@ class Identity(InteractiveScene):
             ReplacementTransform(rect1, all_rects[0]),
             FadeIn(new_equ[R"\cdot"][0]),
             FadeOut(equ["+"][0]),
-            Transform(equ["6"][0], new_equ["6"]),
+            Transform(equ["6"], new_equ["6"][0]),
             Transform(equ["5"][0], new_equ["5"][0])
         )
         self.wait()
