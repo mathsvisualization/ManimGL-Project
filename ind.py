@@ -73,6 +73,7 @@ class Identity(InteractiveScene):
             Transform(equ["5"][-1], new_equ["5"][-1], remover=True),
             ReplacementTransform(rect2, all_rects[1]),
         )
+        self.remove(self.mobjects[new_equ["="][0]])
         self.add(new_equ)
         self.wait()
 
@@ -92,7 +93,7 @@ class Identity(InteractiveScene):
             Transform(new_equ["="][0], frac_equ["="][0], remover=True)
         )
 
-        """self.play(
+        """ self.play(
             Transform(new_equ["="], frac_equ["="], remover=True),
             Transform(new_equ["6^x"], frac_equ["6^x"], remover=True),
             Transform(new_equ["5^x"], frac_equ["5^x"], remover=True),
