@@ -48,6 +48,8 @@ class OPT(InteractiveScene):
                 lag_ratio=0.25
             )
         )
+        self.wait()
+
         rects = [
             SurroundingRectangle(
                 equ[f"{base}^{{x + 5}}"][0],
