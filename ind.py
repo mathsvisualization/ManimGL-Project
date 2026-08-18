@@ -73,7 +73,7 @@ class Identity(InteractiveScene):
             Transform(equ["5"][-1], new_equ["5"][-1], remover=True),
             ReplacementTransform(rect2, all_rects[1]),
         )
-        self.remove(self.mobjects[new_equ["="][0]])
+        self.remove(equ)
         self.add(new_equ)
         self.wait()
 
