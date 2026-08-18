@@ -82,6 +82,5 @@ class Identity(InteractiveScene):
             FadeOut(remember_rect),
             FadeOut(rect3),
         )
-        self.remove(equ, new_equ)
         self.wait()
 
