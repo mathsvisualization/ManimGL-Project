@@ -127,7 +127,8 @@ class Identity(InteractiveScene):
             ShowCreation(frac_igp_rect)
         )
         self.wait()
-        self.add(frac_rects[0], frac_rects[1], frac_rects[2])
+        # self.add(frac_rects[0], frac_rects[1], frac_rects[2])
+        self.add(frac_rects)
         """self.play(
             LaggedStart(
              *(ShowCreation(rect) for rect in frac_rects),
