@@ -98,9 +98,13 @@ class Identity(InteractiveScene):
             old_base = equ[str(base)][0 if base == 6 else 1]
             new_base = new_equ[str(base)][1 if base == 6 else 2]
 
+            old_exp = equ["5"][0 if base == 6 else -1]
+            new_exp = new_equ["5"][1 if base == 6 else -1]
+
             transforms.extend([
                 Transform(old_power, new_power),
                 Transform(old_base.copy(), new_base),
+                Transform(old_exp, new_exp),
                 FadeIn(new_equ[R"\cdot"][i]),
                 FadeOut(equ["+"][i]),
                 ReplacementTransform(rects[i], all_rects[i]),
