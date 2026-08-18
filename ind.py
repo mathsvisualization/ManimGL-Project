@@ -78,9 +78,10 @@ class Identity(InteractiveScene):
         self.wait()
 
         self.play(
-            FadeOut(remember),
-            FadeOut(remember_rect),
-            FadeOut(rect3),
+            FadeOut(remember, shift=DOWN * 0.5),
+            LaggedStart(
+                *(Uncreate(rec) for rec in [*all_rect, *all_rects]),
+                lag_ratio=0
+            )
         )
         self.wait()
-
