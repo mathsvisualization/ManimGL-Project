@@ -113,7 +113,7 @@ class Identity(InteractiveScene):
         )
         frac_igp.set_color(color)
         frac_igp.arrange(DOWN, buff=MED_LARGE_BUFF * 1.1)
-        frac_igp[1].shift(0.1 * UP)
+        frac_igp[1].shift(0.25 * UP)
 
         frac_igp_rect = SurroundingRectangle(frac_igp, stroke_width=3, stroke_color=color).round_corners(0.05)
 
