@@ -17,7 +17,6 @@ class Identity(InteractiveScene):
             equ.animate.shift(2.0 * UP),
             FadeOut(xequal, shift=DOWN*0.5)
         )
-        self.wait()
 
         remember = VGroup(
             TexText("Remember", font_size=40),
@@ -80,8 +79,9 @@ class Identity(InteractiveScene):
         self.play(
             FadeOut(remember, shift=DOWN * 0.5),
             LaggedStart(
-                *(Uncreate(rec) for rec in [*all_rect, *all_rects]),
-                lag_ratio=0
+                *(Uncreate(rec) for rec in [*all_rect, *all_rects, remember_rect]),
+                lag_ratio=0,
+                rate_func=linear,
             )
         )
         self.wait()
