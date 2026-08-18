@@ -56,7 +56,8 @@ class Identity(InteractiveScene):
         new_equ.set_color(color)
 
         all_rects = VGroup(
-            SurroundingRectangle(new_equ[R"6^x \cdot 6^5"], stroke_width=3, stroke_color=color).round_corners(0.05)
+            SurroundingRectangle(new_equ[R"6^x \cdot 6^5"], stroke_width=3, stroke_color=color).round_corners(0.05),
+            SurroundingRectangle(new_equ[R"5^x \cdot 5^5"], stroke_width=3, stroke_color=color).round_corners(0.05)
         )
 
         self.play(
@@ -65,6 +66,6 @@ class Identity(InteractiveScene):
             FadeIn(new_equ[R"\cdot"][0]),
             FadeOut(equ["+"][0]),
             Transform(equ["6"][0].copy(), new_equ["6"][1]),
-            Transform(equ["5"][0], new_equ["5"][0])
+            Transform(equ["5"][0], new_equ["5"][0]),
         )
         self.wait()
