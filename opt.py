@@ -24,7 +24,7 @@ class OPT(InteractiveScene):
             equ.animate.shift(2.0 * UP),
             FadeOut(xequal, shift=DOWN * 0.5)
         )
-        self.wait()
+        self.wait(0.1)
 
         remember = VGroup(
             TexText("Remember", font_size=40),
@@ -48,8 +48,6 @@ class OPT(InteractiveScene):
                 lag_ratio=0.25
             )
         )
-        self.wait(0.1)
-
         rects = [
             SurroundingRectangle(
                 equ[f"{base}^{{x + 5}}"][0],
