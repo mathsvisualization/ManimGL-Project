@@ -1,6 +1,6 @@
 from manimlib import *
 
-class Identity(InteractiveScene):
+class OPT(InteractiveScene):
     def construct(self):
         color = [PURPLE_A, PURPLE_C]
 
