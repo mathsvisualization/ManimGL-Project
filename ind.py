@@ -94,9 +94,6 @@ class Identity(InteractiveScene):
             Transform(new_equ["6^x"][0], frac_equ["6^x"][0], remover=True),
             Transform(new_equ["5^x"][0], frac_equ["5^x"][0], remover=True),
             Transform(new_equ[R"\cdot"][0], frac_equ[2], remover=True),
-            Transform(new_equ["5^5"][0], frac_equ["5^5"][0], remover=True),
-            Transform(new_equ["6^5"][0], frac_equ["6^5"][0], remover=True),
-            Transform(new_equ[R"\cdot"][1], frac_equ[-3], remover=True),
-            lag_ratio=0.25,
         )
+        self.add(frac_equ)
         self.wait()
