@@ -73,8 +73,6 @@ class Identity(InteractiveScene):
             FadeOut(equ["+"][1]),
             Transform(equ["5"][-1], new_equ["5"][-1], remover=True),
             ReplacementTransform(rect2, all_rects[1]),
-            Animation(equ),
-            Animation(new_equ)
         )
         self.wait()
 
