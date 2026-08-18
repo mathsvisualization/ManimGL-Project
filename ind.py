@@ -19,7 +19,7 @@ class Identity(InteractiveScene):
         )
 
         remember = VGroup(
-            TexText("Remember", font_size=40),
+            TexText("Remember!", font_size=40),
             Tex(R"a^{m + n} = a^m \cdot a^n", font_size=40)
         )
         remember.arrange(DOWN, buff=MED_LARGE_BUFF * 1.1)
@@ -102,8 +102,23 @@ class Identity(InteractiveScene):
             )
         )
         self.add(frac_equ)
-        self.wait()
         self.play(
             frac_equ.animate.shift(2.0 * UP)
+        )
+        self.wait()
+
+        frac_igp = VGroup(
+            TexText("Remember!", font_size=40),
+            Tex(R"\frac{a^n}{b^n} = \left( \frac{a}{b} \right)^n")
+        )
+        frac_igp.set_color(color)
+        frac_igp.arrange(DOWN, buff=MED_LARGE_BUFF * 1.1)
+
+        frac_igp_rect = SurroundingRectangle(frac_igp, stroke_width=3, stroke_color=color).round_corners(0.05)
+
+        self.play(
+            Write(frac_igp[0]),
+            FadeIn(frac_igp, shift=DOWN * 0.5),
+            ShowCreation(frac_igp_rect)
         )
         self.wait()
