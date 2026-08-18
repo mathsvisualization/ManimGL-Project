@@ -1,6 +1,6 @@
 from manimlib import *
 
-class OPT(InteractiveScene):
+class Identity(InteractiveScene):
     def construct(self):
         color = [PURPLE_A, PURPLE_C]
 
@@ -24,7 +24,7 @@ class OPT(InteractiveScene):
             equ.animate.shift(2.0 * UP),
             FadeOut(xequal, shift=DOWN * 0.5)
         )
-        self.wait(0.1)
+        self.wait()
 
         remember = VGroup(
             TexText("Remember", font_size=40),
@@ -48,7 +48,7 @@ class OPT(InteractiveScene):
                 lag_ratio=0.25
             )
         )
-        self.wait()
+        self.wait(0.1)
 
         rects = [
             SurroundingRectangle(
@@ -108,4 +108,4 @@ class OPT(InteractiveScene):
 
         self.play(*transforms)
 
-        self.wait(2)
+        self.wait()
