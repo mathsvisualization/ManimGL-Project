@@ -49,4 +49,4 @@ class Identity(InteractiveScene):
                 run_time=2
             )
         )
-        self.wait()
+        self.wait(
