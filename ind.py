@@ -114,8 +114,7 @@ class Identity(InteractiveScene):
         frac_igp.set_color(color)
         frac_igp.arrange(DOWN, buff=MED_LARGE_BUFF * 1.1)
 
-        frac_igp_rect = SurroundingRectangle(frac_igp, stroke_width=3, stroke_color=color).round_corners(0.05)
-        frac_igp[1].shift(0.1 * UP)
+        frac_igp_rect = SurroundingRectangle(frac_igp, stroke_width=3, stroke_color=color, buff=MED_LARGE_BUFF * 0.35).round_corners(0.05)
 
         frac_rects = VGroup(
             SurroundingRectangle(frac_equ[R"\frac{6^x}{5^x}"], stroke_width=3, stroke_color=color).round_corners(0.05),
