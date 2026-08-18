@@ -88,12 +88,14 @@ class Identity(InteractiveScene):
 
         frac_equ = Tex(R"\frac{6^x}{5^x} = \frac{5^5}{6^5}")
         frac_equ.set_color(color)
-        self.add(frac_equ)
+        self.play(
+            Transform(equ["6^x"][0], frac_equ["6^x"][0])
+        )
 
         """self.play(
             Transform(new_equ["="], frac_equ["="], remover=True),
             Transform(new_equ["6^x"], frac_equ["6^x"], remover=True),
             Transform(new_equ["5^x"], frac_equ["5^x"], remover=True),
-            Transform(new_equ[R"\cdot"][0], frac_equ[2], remover=True),
+            Transform(new_equ[R"\\cdot"][0], frac_equ[2], remover=True),
         )"""
         self.wait()
