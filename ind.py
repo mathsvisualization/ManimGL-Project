@@ -33,18 +33,20 @@ class Identity(InteractiveScene):
             ShowCreation(remember_rect),
             LaggedStart(Write(remember[0]), FadeIn(remember[1], shift=UP * 0.5), lag_ratio=0.25)
         )
-        self.wait()
+        self.wait(0.5)
 
-        rect_equ = ["6^{x + 5}", "5^{x + 5}", R"a^m \cdot a^n"]
-        rect1 = SurroundingRectangle(equ[rect_equ[0]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF).round_corners(0.05)
-        rect2 = SurroundingRectangle(equ[rect_equ[1]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF).round_corners(0.05)
-        rect3 = SurroundingRectangle(remember[rect_equ[2]][0], stroke_color=color, stroke_width=3, buff=MED_SMALL_BUFF).round_corners(0.05)
+        rect1 = SurroundingRectangle(equ["6^{x + 5}"][0], stroke_color=color, stroke_width=3).round_corners(0.05)
+        rect2 = SurroundingRectangle(equ["5^{x + 5}"][0], stroke_color=color, stroke_width=3).round_corners(0.05)
+        rect3 = SurroundingRectangle(remember[1][R"a^m \cdot a^n"][0], stroke_color=color, stroke_width=3).round_corners(0.05)
 
         all_rect = VGroup(rect1, rect2, rect3)
 
         self.play(
-            ShowCreation(all_rect),
-            Animation(equ),
-            Animation(remember)
+            LaggedStart(
+                *(ShowCreation(rect) for rect in all_rect),
+                lag_ratio=0,
+                rate_func=lambda x: x,
+                run_time=2
+            )
         )
         self.wait()
