@@ -33,7 +33,7 @@ class Identity(InteractiveScene):
             ShowCreation(remember_rect),
             LaggedStart(Write(remember[0]), FadeIn(remember[1], shift=UP * 0.5), lag_ratio=0.25)
         )
-        self.wait(0.5)
+        self.wait(0.1)
 
         rect1 = SurroundingRectangle(equ["6^{x + 5}"][0], stroke_color=color, stroke_width=3).round_corners(0.05)
         rect2 = SurroundingRectangle(equ["5^{x + 5}"][0], stroke_color=color, stroke_width=3).round_corners(0.05)
@@ -67,5 +67,11 @@ class Identity(InteractiveScene):
             FadeOut(equ["+"][0]),
             Transform(equ["6"][0].copy(), new_equ["6"][1]),
             Transform(equ["5"][0], new_equ["5"][0]),
+            Transform(equ["5^{x"][0], new_equ["5^x"][0]),
+            Transform(equ["5"][1].copy(), new_equ["5"][2]),
+            FadeIn(new_equ[R"\cdot"][1]),
+            FadeOut(equ["+"][1]),
+            Transform(equ["5"][-1], new_equ["5"][-1]),
+            ReplacementTransform(rect2, all_rects[1]),
         )
         self.wait()
