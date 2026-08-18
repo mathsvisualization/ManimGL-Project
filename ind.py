@@ -130,7 +130,7 @@ class Identity(InteractiveScene):
         self.wait()
         self.play(
             LaggedStart(
-                *(ShowCreation(rect) for rect in frac_rects),
+                *(ShowCreation(r) for r in frac_rects),
                 lag_ratio=0,
                 rate_func=linear,
             )
