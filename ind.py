@@ -136,3 +136,18 @@ class Identity(InteractiveScene):
             )
         )
         self.wait()
+
+        fin = Tex(R"\left( \frac{6}{5} \right)^x = \left( \frac{5}{6} \right)^5")
+        fin.shift(2.0 * UP)
+        fin.set_color(color)
+
+        fin_rects = VGroup(
+            SurroundingRectangle(fin[R"\left( \frac{6}{5} \right)^x"], stroke_width=3, stroke_color=color).round_corners(0.05),
+            SurroundingRectangle(fin[R"\left( \frac{5}{6} \right)^5"], stroke_width=3, stroke_color=color).round_corners(0.05),
+        )
+        self.play(
+            Transform(frac_equ["6"][0], fin["6"][0], remover=True),
+            Transform(frac_equ["5"][0], fin["5"][0], remover=True),
+            Transform(frac_equ["x"], fin["x"][0], remover=True),
+        )
+        self.wait()
