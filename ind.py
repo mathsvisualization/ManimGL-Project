@@ -137,7 +137,7 @@ class Identity(InteractiveScene):
         )
         self.wait()
 
-        fin = Tex(R"\left( \frac{6}{5} \right)^x = \left( \frac{5}{6} \right)^5", isolate=["6", "5", R"\left(", R"\right)"])
+        fin = Tex(R"\left( \frac{6}{5} \right)^x = \left( \frac{5}{6} \right)^5", isolate=["6", "5"])
         fin.shift(2.0 * UP)
         fin.set_color(color)
 
