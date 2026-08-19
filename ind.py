@@ -149,6 +149,7 @@ class Identity(InteractiveScene):
             Transform(frac_equ[0], fin[1]),
             Transform(frac_equ[2], fin[2]),
             Transform(frac_equ[3], fin[3]),
+            Transform(frac_equ["x"], fin["x"][0]),
             Write(fin[0]),
             Write(fin[4])
         )
