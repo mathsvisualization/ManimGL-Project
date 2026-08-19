@@ -160,5 +160,6 @@ class Identity(InteractiveScene):
             Transform(frac_equ[8], fin[9]),
             Transform(frac_equ[7], fin[-1]),
             Transform(frac_equ[10], fin[-1]),
+            TransformMatchingShapes(frac_rects[:-1], fin_rects)
         )
         self.wait()
