@@ -149,7 +149,8 @@ class Identity(InteractiveScene):
             Transform(frac_equ[0], fin[1]),
             Transform(frac_equ[2], fin[2]),
             Transform(frac_equ[3], fin[3]),
-            Transform(frac_equ[1::3][:2], fin[5]),
+            Transform(frac_equ[1], fin[5]),
+            Transform(frac_equ[4], fin[5]),
             Write(fin[0]),
             Write(fin[4]),
             Write(fin[7]),
@@ -157,6 +158,7 @@ class Identity(InteractiveScene):
             Transform(frac_equ[6], fin[8]),
             Transform(frac_equ[9], fin[10]),
             Transform(frac_equ[8], fin[9]),
-            Transform(frac_equ[7::3][0], fin[-1]),
+            Transform(frac_equ[7], fin[-1]),
+            Transform(frac_equ[10], fin[-1]),
         )
         self.wait()
