@@ -153,4 +153,6 @@ class Identity(InteractiveScene):
             Write(fin[0]),
             Write(fin[4])
         )
+        self.remove(frac_equ)
+        self.add(fin)
         self.wait()
