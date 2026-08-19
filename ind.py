@@ -149,7 +149,7 @@ class Identity(InteractiveScene):
             Transform(frac_equ["6"][0], fin["6"][0],),
             Transform(frac_equ["5"][0], fin["5"][0],),
             Transform(frac_equ["x"], fin["x"][0],),
-            Write(fin[R"\left("]),
-            Write(fin(R"\right)"))
+            Write(fin[0]),
+            Write(fin[4])
         )
         self.wait()
