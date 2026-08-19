@@ -146,9 +146,9 @@ class Identity(InteractiveScene):
             SurroundingRectangle(fin[R"\left( \frac{5}{6} \right)^5"], stroke_width=3, stroke_color=color).round_corners(0.05),
         )
         self.play(
-            Transform(frac_equ["6"][0], fin["6"][0],),
-            Transform(frac_equ["5"][0], fin["5"][0],),
-            Transform(frac_equ["x"], fin["x"][0],),
+            Transform(frac_equ["6"][0], fin["6"][0]),
+            Transform(frac_equ["5"][0], fin["5"][0]),
+            Transform(frac_equ["x"], fin["x"][0]),
             Write(fin[0]),
             Write(fin[4])
         )
