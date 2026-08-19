@@ -105,8 +105,6 @@ class Identity(InteractiveScene):
         self.play(
             frac_equ.animate.shift(2.0 * UP)
         )
-        self.wait()
-
         frac_igp = VGroup(
             TexText("Remember!", font_size=40),
             Tex(R"\frac{a^n}{b^n} = \left( \frac{a}{b} \right)^n")
@@ -146,21 +144,22 @@ class Identity(InteractiveScene):
             SurroundingRectangle(fin[R"\left( \frac{5}{6} \right)^5"], stroke_width=3, stroke_color=color).round_corners(0.05),
         )
         self.play(
-            Transform(frac_equ[0], fin[1]),
-            Transform(frac_equ[2], fin[2]),
-            Transform(frac_equ[3], fin[3]),
-            Transform(frac_equ[1], fin[5]),
-            Transform(frac_equ[4], fin[5]),
-            Write(fin[0]),
-            Write(fin[4]),
-            Write(fin[7]),
-            Write(fin[-2]),
-            Transform(frac_equ[6], fin[8]),
-            Transform(frac_equ[9], fin[10]),
-            Transform(frac_equ[8], fin[9]),
-            Transform(frac_equ[7], fin[-1]),
-            Transform(frac_equ[10], fin[-1]),
-            TransformMatchingShapes(frac_rects[0], fin_rects[0]),
-            TransformMatchingShapes(frac_rects[1], fin_rects[1])
+            Transform(frac_equ[0], fin[1], remover=True),
+            Transform(frac_equ[2], fin[2], remover=True),
+            Transform(frac_equ[3], fin[3], remover=True),
+            Transform(frac_equ[1], fin[5], remover=True),
+            Transform(frac_equ[4], fin[5], remover=True),
+            Write(fin[0], remover=True),
+            Write(fin[4], remover=True),
+            Write(fin[7], remover=True),
+            Write(fin[-2], remover=True),
+            Transform(frac_equ[6], fin[8], remover=True),
+            Transform(frac_equ[9], fin[10], remover=True),
+            Transform(frac_equ[8], fin[9], remover=True),
+            Transform(frac_equ[7], fin[-1], remover=True),
+            Transform(frac_equ[10], fin[-1], remover=True),
+            ReplacementTransform(frac_rects[0], fin_rects[0]),
+            ReplacementTransform(frac_rects[1], fin_rects[1])
         )
+        self.add(fin)
         self.wait()
