@@ -56,34 +56,43 @@ class ConservationOfEnergy(Scene):
         h_label = always_redraw(lambda: Tex(r"h", color="#7B68EE", font_size=32).next_to(h_line, RIGHT, buff=0.08))
 
         # Gravity arrow (mg)
-        mg_arrow = always_redraw(lambda: Arrow(get_bob_pos(), get_bob_pos() + DOWN * 0.75, color=WHITE, buff=0, stroke_width=3))
-        mg_label = always_redraw(lambda: Tex(r"mg", font_size=28).next_to(mg_arrow, DOWN, buff=0.08))
+        mg_arrow = always_redraw(lambda: Arrow(
+            get_bob_pos(), 
+            get_bob_pos() + DOWN * 0.75, 
+            color=WHITE, 
+            buff=0, 
+            stroke_width=3
+        ))
+        mg_label = always_redraw(lambda: Tex(r"mg", font_size=28).next_to(mg_arrow.get_end(), DOWN, buff=0.08))
 
         # Tension arrow (T)
+        tension_end = lambda: get_bob_pos() + (pivot_point - get_bob_pos()) / rod_length * 0.95
         tension_arrow = always_redraw(lambda: Arrow(
-            get_bob_pos(),
-            get_bob_pos() + (pivot_point - get_bob_pos()) / rod_length * 0.95,
-            color=WHITE, buff=0, stroke_width=3
+            get_bob_pos(), 
+            tension_end(), 
+            color=WHITE, 
+            buff=0, 
+            stroke_width=3
         ))
-        t_label = always_redraw(lambda: Tex(r"T", font_size=28).next_to(tension_arrow.get_end(), LEFT, buff=0.08))
+        t_label = always_redraw(lambda: Tex(r"T", font_size=28).next_to(tension_end(), LEFT, buff=0.08))
 
-        # Velocity arrow (v)
-        def get_v_arrow():
+        # Velocity calculations & Safe Vector Group
+        def get_velocity_mobjects():
             th = get_theta()
             v_val = theta_max * omega * np.cos(omega * time_tracker.get_value())
             tangent = np.array([np.cos(th), np.sin(th), 0])
             scaled_v = tangent * v_val * 0.55
-            if np.linalg.norm(scaled_v) < 0.05:
-                return VMobject()
-            return Arrow(get_bob_pos(), get_bob_pos() + scaled_v, color="#F5DEB3", stroke_width=3, buff=0)
+            group = VGroup()
 
-        v_arrow = always_redraw(get_v_arrow)
-        v_label = always_redraw(
-            lambda: Tex(r"v", color="#F5DEB3", font_size=28).next_to(v_arrow.get_end(), UP + LEFT, buff=0.05)
-            if isinstance(v_arrow, Arrow) else VMobject()
-        )
+            if np.linalg.norm(scaled_v) > 0.08:
+                arrow = Arrow(get_bob_pos(), get_bob_pos() + scaled_v, color="#F5DEB3", stroke_width=3, buff=0)
+                label = Tex(r"v", color="#F5DEB3", font_size=28).next_to(arrow.get_end(), UP + LEFT, buff=0.05)
+                group.add(arrow, label)
+            return group
 
-        self.add(rod, bob, h_line, h_label, mg_arrow, mg_label, tension_arrow, t_label, v_arrow, v_label)
+        v_group = always_redraw(get_velocity_mobjects)
+
+        self.add(rod, bob, h_line, h_label, mg_arrow, mg_label, tension_arrow, t_label, v_group)
 
         # 3. Bar Chart
         chart_base_y = -1.2
@@ -101,31 +110,30 @@ class ConservationOfEnergy(Scene):
 
         def get_pe_ratio():
             th = get_theta()
-            return (1 - np.cos(th)) / (1 - np.cos(theta_max))
+            ratio = (1 - np.cos(th)) / (1 - np.cos(theta_max))
+            return np.clip(ratio, 0.0, 1.0)
 
-        pe_bar = always_redraw(lambda: Rectangle(
-            width=bar_width,
-            height=max(0.01, get_pe_ratio() * max_bar_height),
-            fill_color="#7B68EE",
-            fill_opacity=0.9,
-            stroke_width=0
-        ).move_to([-2.1, chart_base_y + (get_pe_ratio() * max_bar_height) / 2, 0]))
+        # Safe Dynamic Bars using Polygon to avoid sizing issues
+        def make_bar(x_center, height, color):
+            h = max(height, 0.02)
+            w = bar_width
+            y0 = chart_base_y
+            y1 = chart_base_y + h
+            poly = Polygon(
+                [x_center - w / 2, y0, 0],
+                [x_center + w / 2, y0, 0],
+                [x_center + w / 2, y1, 0],
+                [x_center - w / 2, y1, 0],
+                fill_color=color,
+                fill_opacity=0.9,
+                stroke_width=0
+            )
+            return poly
 
-        ke_bar = always_redraw(lambda: Rectangle(
-            width=bar_width,
-            height=max(0.01, (1 - get_pe_ratio()) * max_bar_height),
-            fill_color="#F4A460",
-            fill_opacity=0.9,
-            stroke_width=0
-        ).move_to([-0.1, chart_base_y + ((1 - get_pe_ratio()) * max_bar_height) / 2, 0]))
+        pe_bar = always_redraw(lambda: make_bar(-2.1, get_pe_ratio() * max_bar_height, "#7B68EE"))
+        ke_bar = always_redraw(lambda: make_bar(-0.1, (1 - get_pe_ratio()) * max_bar_height, "#F4A460"))
+        total_bar = make_bar(2.1, max_bar_height, "#E77471")
 
-        total_bar = Rectangle(
-            width=bar_width,
-            height=max_bar_height,
-            fill_color="#E77471",
-            fill_opacity=0.9,
-            stroke_width=0
-        ).move_to([2.1, chart_base_y + max_bar_height / 2, 0])
         self.add(pe_bar, ke_bar, total_bar)
 
         # 4. Formula at bottom
