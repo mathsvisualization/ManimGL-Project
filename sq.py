@@ -1,51 +1,71 @@
 from manimlib import *
 
-class FunctionGrowthComparison(Scene):
+class CascadingFunctionGrowth(Scene):
     def construct(self):
-        # Title
+        # Title ko ek baar establish karte hain
         title = Text("How Fast Can a Function Grow?", font_size=36)
         title.to_edge(UP, buff=0.8)
         self.play(Write(title))
 
-        # Data for functions: (Name, Math LaTeX/Text, Box Size, Color)
-        # Size ko hum growth ke hisaab se scale kar rahe hain
+        # Data for functions: (Name, Math LaTeX, Color)
+        # Size aur scale code ke logic se handle hoga
         stages = [
-            ("decimal factorial", "1", 1.0, BLUE_E),
-            ("factorial", "n!", 1.5, TEAL_E),
-            ("self power", "n^n", 2.2, GREEN_E),
-            ("exp. quadratic", "2^{n^2}", 3.0, YELLOW_E),
-            ("double exponential", "2^{2^n}", 4.0, RED_E),
+            ("quadratic", "n^2", BLUE_E),
+            ("factorial", "n!", TEAL_E),
+            ("exponential", "2^n", YELLOW_E),
+            ("double exponential", "2^{2^n}", RED_E),
         ]
 
-        current_box = None
-        current_label = None
-        current_formula = None
+        # Ye group humare cascade hone wale boxes ko store karega
+        receding_stack = VGroup()
 
-        for name, formula_str, size, color in stages:
-            # Create Card/Box
-            box = Square(side_length=size, fill_color=color, fill_opacity=0.8)
+        for name, formula_str, color in stages:
+            # 1. Create the NEW, largest card at the center
+            # Is card ka initial size hum fix rakhte hain (jaise Square ka side 4)
+            box = Square(side_length=4, fill_color=color, fill_opacity=0.8)
             box.set_stroke(WHITE, width=2)
-            box.move_to(ORIGIN)
-
-            # Labels inside box
-            lbl = Text(name, font_size=20).to_edge(UP, buff=0.2)
-            form = Tex(formula_str, font_size=int(40 * (size / 2.0)))
-            form.move_to(box.get_center())
-
-            group = VGroup(box, lbl, form)
-
-            if current_box is None:
-                # Pehla box direct aayega
-                self.play(FadeIn(group, scale=0.5))
-            else:
-                # Baaki steps me pichhla wala chhota hokar side/background me jayega aur naya bada box aayega
-                self.play(
-                    current_group.animate.scale(0.4).to_edge(LEFT, buff=0.5).set_opacity(0.4),
-                    FadeIn(group, scale=0.7),
-                    run_time=1
-                )
             
-            current_group = group
+            # Label elements for the box
+            lbl = Text(name, font_size=24).next_to(box.get_top(), DOWN, buff=0.3)
+            form = Tex(formula_str, font_size=60)
+            form.move_to(box.get_center())
+            
+            new_card = VGroup(box, lbl, form)
+            
+            # 2. Logic to shift and scale existing stack
+            animations = []
+            if len(receding_stack) > 0:
+                # Agar koi pichhle cards hain, unhe LEFT move karo aur resize karo
+                # 'shift_vector' har card ko kitna door le jana hai, use define karta hai
+                shift_vector = LEFT * 3
+                
+                # Hum pure group ko move karte hain, par cards par cascade effect pane ke liye 
+                # har single card ko individual animation provide karni hogi loop me
+                for i, card in enumerate(receding_stack):
+                    # Kitna pichhe ja raha hai (age ke hisaab se), uske basis par scale aur opacity set karein
+                    # Jitna purana card (i index chhota), utna chhota aur dim
+                    target_scale = 0.5 ** (len(receding_stack) - i) 
+                    target_opacity = 0.6 ** (len(receding_stack) - i)
+                    
+                    animations.append(
+                        card.animate
+                        .shift(shift_vector)
+                        .scale(0.8) # Cascade shrinking: sabhi card thoda chhote honge
+                        .set_opacity(target_opacity)
+                    )
+            
+            # 3. Perform the cascading shift and show the new card
+            self.play(
+                *animations,
+                FadeIn(new_card, scale=0.5, target_position=ORIGIN),
+                run_time=1.5
+            )
+            
+            # Naye card ko stack me add karein agle loop ke liye
+            receding_stack.add(new_card)
+            
+            # Thodi der wait karein har stage par
             self.wait(1.5)
 
-        self.wait(2)
+        self.wait(3)
+
