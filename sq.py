@@ -57,7 +57,7 @@ class CascadingFunctionGrowth(Scene):
             # 3. Perform the cascading shift and show the new card
             self.play(
                 *animations,
-                FadeIn(new_card, scale=0.5, target_position=ORIGIN),
+                FadeIn(new_card, scale=0.5),
                 run_time=1.5
             )
             
