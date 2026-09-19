@@ -1,3 +1,3 @@
-xvfb-run manimgl pen.py -w --fps 30
+xvfb-run manimgl sq.py -w --fps 30
 # ffmpeg -i my.mov -c copy -movflags +faststart -bsf:a aac_adtstoasc patched_video.mov
 ./g
