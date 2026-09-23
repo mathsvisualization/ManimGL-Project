@@ -174,16 +174,16 @@ class SceneFileWriter(object):
         gain_to_background: float | None = None,
         start_time: float | None = None,
         end_time: float | None = None,
+        repeat: int = 1,
         fade_in: float = 0.0,
         fade_out: float = 0.0,
-        repeat: int = 1,
         pan: float | None = None,
         pan_start: float | None = None,
         pan_end: float | None = None
     ) -> None:
         file_path = get_full_sound_file_path(sound_file)
         new_segment = AudioSegment.from_file(file_path)
-
+      
         # Slice (trim) the audio segment if start_time or end_time is provided.
         # Note: Slicing is intentionally performed BEFORE applying gain and fades 
         # to ensure the effects apply exactly to the boundaries of the trimmed segment.
@@ -197,7 +197,6 @@ class SceneFileWriter(object):
         # Allows looping short effects (e.g., ticking) natively, avoiding redundant add_sound() calls.
         if repeat > 1:
             new_segment = new_segment * int(repeat)
-
 
         # Dynamic or Static Stereo Panning (FPS-Synced)
         if pan_start is not None and pan_end is not None:
@@ -227,9 +226,9 @@ class SceneFileWriter(object):
 
         # Adding fade-in and fade-out effect smoothly
         # Normalized: User inputs time in seconds, we convert it to milliseconds internally for pydub
-        if fade_in > 0:
+        if fade_in > 0.0:
             new_segment = new_segment.fade_in(int(fade_in * 1000))
-        if fade_out > 0:
+        if fade_out > 0.0:
             new_segment = new_segment.fade_out(int(fade_out * 1000))
         self.add_audio_segment(new_segment, time, gain_to_background)
 
