@@ -204,7 +204,7 @@ class SceneFileWriter(object):
             # Sync audio chunks perfectly with visual frames using the scene's camera FPS
             fps = self.scene.camera.fps
             chunk_size = max(1, int(1000 / fps))
-            
+    
             total_ms = len(new_segment)
             panned_chunks = []
             
