@@ -63,7 +63,7 @@ class DopplerEffect(Scene):
         
         # 5. Math Formula Box
         formula = Tex(r"f_{obs} = f_{src} \frac{v_{sound}}{v_{sound} - v_{radial}}", font_size=40)
-        formula_box = SurroundingRectangle(formula, color="#64B5F6", buff=0.25, stroke_width=2, corner_radius=0.1)
+        formula_box = SurroundingRectangle(formula, color="#64B5F6", buff=0.25, stroke_width=2)
         formula_group = VGroup(formula, formula_box).to_edge(DOWN, buff=0.5)
         self.add(formula_group)
 
