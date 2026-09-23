@@ -135,7 +135,7 @@ class EnhancedDopplerEffect(Scene):
         waves.add_updater(update_waves)
 
         # 7. Add Sync Audio (If generated)
-        self.add_sound("doppler_sound.wav", start_time=3.0, fade_in=0.0, fade_out=0.0)
+        self.add_sound("doppler_sound.wav", end_time=4, fade_in=0.0, fade_out=0.0, repeat=2)
 
         # 8. Animate Everything via the Master Clock
         self.play(

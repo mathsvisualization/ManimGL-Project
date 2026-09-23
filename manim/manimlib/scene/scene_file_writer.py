@@ -175,7 +175,8 @@ class SceneFileWriter(object):
         start_time: float | None = None,
         end_time: float | None = None,
         fade_in: float = 0.0,
-        fade_out: float = 0.0
+        fade_out: float = 0.0,
+        repeat: int = 1
     ) -> None:
         file_path = get_full_sound_file_path(sound_file)
         new_segment = AudioSegment.from_file(file_path)
@@ -189,6 +190,10 @@ class SceneFileWriter(object):
             new_segment = new_segment[start_ms:end_ms]
         if gain:
             new_segment = new_segment.apply_gain(gain)
+
+        # Allows looping short effects (e.g., ticking) natively, avoiding redundant add_sound() calls.
+        if repeat > 1:
+            new_segment = new_segment * int(repeat)
 
         # Adding fade-in and fade-out effect smoothly
         # Normalized: User inputs time in seconds, we convert it to milliseconds internally for pydub
