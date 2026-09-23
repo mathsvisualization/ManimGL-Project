@@ -5,7 +5,7 @@ from scipy.io.wavfile import write
 v_sound = 5.0
 v_car = 2.2
 f_src = 1213
-duration = 7.0
+duration = 8.0
 sample_rate = 44100  # Standard audio sample rate
 
 # Time array
