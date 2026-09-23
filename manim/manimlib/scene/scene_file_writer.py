@@ -172,11 +172,21 @@ class SceneFileWriter(object):
         time: float | None = None,
         gain: float | None = None,
         gain_to_background: float | None = None,
+        start_time: float | None = None,
+        end_time: float | None = None,
         fade_in: float = 0.0,
         fade_out: float = 0.0
     ) -> None:
         file_path = get_full_sound_file_path(sound_file)
         new_segment = AudioSegment.from_file(file_path)
+
+        # Slice (trim) the audio segment if start_time or end_time is provided.
+        # Note: Slicing is intentionally performed BEFORE applying gain and fades 
+        # to ensure the effects apply exactly to the boundaries of the trimmed segment.
+        if start_time is not None or end_time is not None:
+            start_ms = int(start_time * 1000) if start_time is not None else 0
+            end_ms = int(end_time * 1000) if end_time is not None else None
+            new_segment = new_segment[start_ms:end_ms]
         if gain:
             new_segment = new_segment.apply_gain(gain)
 

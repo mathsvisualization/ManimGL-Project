@@ -646,13 +646,15 @@ class Scene(object):
         time_offset: float = 0,
         gain: float | None = None,
         gain_to_background: float | None = None,
+        start_time: float | None = None,
+        end_time: float | None = None,
         fade_in: float = 0.0,
         fade_out: float = 0.0
     ):
         if self.skip_animations:
             return
         time = self.get_time() + time_offset
-        self.file_writer.add_sound(sound_file, time, gain, gain_to_background, fade_in, fade_out)
+        self.file_writer.add_sound(sound_file, time, gain, gain_to_background, start_time, end_time, fade_in, fade_out)
 
     # Helpers for interactive development
 
