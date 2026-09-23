@@ -179,7 +179,6 @@ class SceneFileWriter(object):
         new_segment = AudioSegment.from_file(file_path)
         if gain:
             new_segment = new_segment.apply_gain(gain)
-        self.add_audio_segment(new_segment, time, gain_to_background)
 
         # Adding fade-in and fade-out effect smoothly
         # Normalized: User inputs time in seconds, we convert it to milliseconds internally for pydub
@@ -187,6 +186,7 @@ class SceneFileWriter(object):
             new_segment = new_segment.fade_in(int(fade_in * 1000))
         if fade_out > 0:
             new_segment = new_segment.fade_out(int(fade_out * 1000))
+        self.add_audio_segment(new_segment, time, gain_to_background)
 
     # Writers
     def begin(self) -> None:
