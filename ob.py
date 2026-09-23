@@ -122,7 +122,7 @@ class DopplerEffect(Scene):
         car.add_updater(lambda m, dt: m.shift(RIGHT * v_car * dt))
         self.add(car)
 
-        self.add_sound("doppler_sound.wav") # <--- Yeh line add karni hai
+        self.add_sound("doppler_sound.wav", fade_in=1.0, fade_out=1.0) # <--- Yeh line add karni hai
 
         # 9. Play Scene
         self.wait(7) 
