@@ -210,7 +210,11 @@ class SceneFileWriter(object):
             
             for i in range(0, total_ms, chunk_size):
                 chunk = new_segment[i:i + chunk_size]
-                progress = min(1.0, i / total_ms)
+                # BUG FIX: Ensure the VERY LAST chunk hits exactly 1.0 progress
+                if i + chunk_size >= total_ms:
+                    progress = 1.0
+                else:
+                    progress = i / total_ms                 
                 current_pan = pan_start + (pan_end - pan_start) * progress
                 panned_chunks.append(chunk.pan(current_pan))
                 
