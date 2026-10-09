@@ -1,5 +1,6 @@
 from manimlib import *
 
+
 class WhatDidYouSee(InteractiveScene):
     def construct(self):
         color = [PURPLE_A, PURPLE_C]
