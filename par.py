@@ -1,7 +1,6 @@
 from manimlib import *
 import numpy as np
 
-
 class WaveExtrapolation(Scene):
     def construct(self):
         # 1. Mathematical curves
