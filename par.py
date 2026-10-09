@@ -82,3 +82,4 @@ class WaveExtrapolation(Scene):
             rate_func=linear
         )
         self.wait()
+ 
